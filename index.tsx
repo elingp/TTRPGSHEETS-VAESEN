@@ -349,7 +349,7 @@ const ARCHETYPES_LIST: ArchetypeDefinition[] = [
     },
     { 
         name: "Athlete", mainAttribute: "Physique", mainSkill: "One Physique skill, depending on chosen sport", 
-        talentChoices: ["Famous", "Robust", "Sprinter", "Pugilist", "Gentleman", "Combat-Trained", "Fleet-footed", "Defensive", "Combat-Trained"], 
+        talentChoices: ["Famous", "Robust", "Sprinter", "Pugilist", "Gentleman", "Combat-Trained", "Fleet-footed", "Defensive"], 
         resourceRange: [2, 4], 
         startingEquipment: ["Athletic apparel", "Equipment for sport of choice"],
         motivations: ["Increase one’s own abilities", "Avenge a past defeat", "Find out who is natural and who is not"],
@@ -1880,6 +1880,13 @@ function loadCharacterFromLocalStorage(): Character | null {
 }
 
 
+// --- TALENT HELPERS ---
+function canTakeTalentMultipleTimes(talentId: string): boolean {
+    // List of talents that can be taken multiple times
+    const multipleTimeTalents = ['tactician', 'wealthy'];
+    return multipleTimeTalents.includes(talentId);
+}
+
 // --- MODAL HANDLING ---
 const relationshipModal = getEl<HTMLDivElement>('addRelationshipModal');
 const relationshipModalTitle = getEl<HTMLHeadingElement>('relationshipModalTitle');
@@ -2864,7 +2871,43 @@ function setupEventListeners() {
         openTalentModalBtn.addEventListener('click', () => {
             addTalentModal.style.display = 'block'; modalTalentSelect.innerHTML = '<option value="" title="">-- Select a Talent --</option>';
             const existingArchetypeTalentId = character.talents.find(tId => ALL_TALENTS_LIST.find(t => t.id === tId)?.archetype === character.archetype);
-            ALL_TALENTS_LIST.filter(t => !t.archetype && !character.talents.includes(t.id) && t.id !== existingArchetypeTalentId).forEach(t => { const o=document.createElement('option');o.value=t.id;o.textContent=t.name;o.title=t.description;modalTalentSelect.appendChild(o); });
+            
+            // Create categorized options: General talents first, then Archetype talents grouped by archetype
+            const generalTalents = ALL_TALENTS_LIST.filter(t => !t.archetype && (!character.talents.includes(t.id) || canTakeTalentMultipleTimes(t.id)));
+            const archetypeTalents = ALL_TALENTS_LIST.filter(t => t.archetype && (!character.talents.includes(t.id) || canTakeTalentMultipleTimes(t.id)) && t.id !== existingArchetypeTalentId);
+            
+            // Add general talents
+            if (generalTalents.length > 0) {
+                const generalGroup = document.createElement('optgroup');
+                generalGroup.label = 'General Talents';
+                generalTalents.forEach(t => {
+                    const o = document.createElement('option');
+                    o.value = t.id; o.textContent = t.name; o.title = t.description;
+                    if (character.talents.includes(t.id)) o.textContent += ' (can take multiple times)';
+                    generalGroup.appendChild(o);
+                });
+                modalTalentSelect.appendChild(generalGroup);
+            }
+            
+            // Add archetype talents grouped by archetype
+            const archetypeGroups = {};
+            archetypeTalents.forEach(t => {
+                if (!archetypeGroups[t.archetype]) archetypeGroups[t.archetype] = [];
+                archetypeGroups[t.archetype].push(t);
+            });
+            
+            Object.keys(archetypeGroups).sort().forEach(archetypeName => {
+                const group = document.createElement('optgroup');
+                group.label = `${archetypeName} Talents`;
+                archetypeGroups[archetypeName].forEach(t => {
+                    const o = document.createElement('option');
+                    o.value = t.id; o.textContent = t.name; o.title = t.description;
+                    if (character.talents.includes(t.id)) o.textContent += ' (can take multiple times)';
+                    group.appendChild(o);
+                });
+                modalTalentSelect.appendChild(group);
+            });
+            
             modalTalentDesc.textContent = 'Description will appear here.'; updateSelectTooltip(modalTalentSelect); 
         });
     }
@@ -2873,11 +2916,13 @@ function setupEventListeners() {
     if (confirmAddTalentBtn && modalTalentSelect && addTalentModal) {
         confirmAddTalentBtn.addEventListener('click', () => { 
             const tId=modalTalentSelect.value; 
-            if(tId && !character.talents.includes(tId)){
+            if(tId){
                 character.talents.push(tId);
                 renderTalents(); 
                 saveCharacterToLocalStorage();
-                console.log(`Talent "${ALL_TALENTS_LIST.find(t=>t.id === tId)?.name}" added.`);
+                const talentName = ALL_TALENTS_LIST.find(t=>t.id === tId)?.name;
+                const count = character.talents.filter(id => id === tId).length;
+                console.log(`Talent "${talentName}" added${count > 1 ? ` (now have ${count})` : ''}.`);
             } 
             closeModal(addTalentModal); 
         });
