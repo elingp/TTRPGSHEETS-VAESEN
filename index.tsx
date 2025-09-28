@@ -347,6 +347,51 @@ const ARCHETYPES_LIST: ArchetypeDefinition[] = [
         ],
         description: "Observes and chronicles the world, often drawn to unusual stories and the depths of human (and inhuman) nature."
     },
+    { 
+        name: "Athlete", mainAttribute: "Physique", mainSkill: "One Physique skill, depending on chosen sport", 
+        talentChoices: ["Famous", "Robust", "Sprinter", "Pugilist", "Gentleman", "Combat-Trained", "Fleet-footed", "Defensive", "Combat-Trained"], 
+        resourceRange: [2, 4], 
+        startingEquipment: ["Athletic apparel", "Equipment for sport of choice"],
+        motivations: ["Increase one’s own abilities", "Avenge a past defeat", "Find out who is natural and who is not"],
+        traumas: ["Lost a fairy bet", "Cursed by a game-fixing witch", "Searching for a missing team-mate"],
+        darkSecrets: ["Drug addicted", "Cheats", "Will fix games for money"],
+        relationshipHooks: [
+            "Good enough company",
+            "A potential rival",
+            "Doesn't like sport, therefore uninteresting"
+        ],
+        description: "A character who excels in physical activities and sports, often driven by competition and personal achievement."
+    },
+    { 
+        name: "Entertainer", mainAttribute: "Empathy", mainSkill: "Manipulation", 
+        talentChoices: ["Famous", "Performer", "Well-Traveled"], 
+        resourceRange: [2, 4], 
+        startingEquipment: ["Costumes", "Make-up", "Scripts"],
+        motivations: ["Find out the truth behind superstitions", "Cleanse a favorite theatre", "Make sure the show can always go on"],
+        traumas: ["Injured by angry spirit", "Saw friends killed by supernatural beings", "Searching for an abducted friend or relative"],
+        darkSecrets: ["Alcoholic", "On the run", "Made a devil’s bargain for success"],
+        relationshipHooks: [
+            "A complete bore",
+            "A potential lover",
+            "I feel you judging me"
+        ],
+        description: "A performer who thrives on attention and admiration, using charm and wit to navigate social situations and captivate audiences."
+    },
+    { 
+        name: "Socialite", mainAttribute: "Empathy", mainSkill: "Inspiration", 
+        talentChoices: ["Famous", "Gentleman", "Wealthy"], 
+        resourceRange: [4, 7], 
+        startingEquipment: ["London apartment", "Country estate", "Revolver"],
+        motivations: ["Removing threats to estate and tenants", "Collecting stories to tell", "Proving one’s quality"],
+        traumas: ["Attacked by castle ghost", "Tenants or relatives abducted by fairies", "Driven from ancestral home by redcaps"],
+        darkSecrets: ["Born from an affair", "Secretly impoverished", "Accidentally killed someone"],
+        relationshipHooks: [
+            "An amusing companion",
+            "Useful, but not a suitable friend",
+            "A good friend"
+        ],
+        description: "A well-connected individual who moves in high society, leveraging influence and resources to address supernatural challenges."
+    },
     {
         name: "Custom Life Path", mainAttribute: "", mainSkill: "",
         talentChoices: [], 
@@ -468,6 +513,7 @@ const ALL_TALENTS_LIST: TalentDefinition[] = [
     { id: "sprinter", name: "Sprinter", description: "Gain +2 to AGILITY when trying to outrun or chase down someone." },
     { id: "theLordsShepherd", name: "The Lord's Shepherd", description: "Gain +2 when using INSPIRATION to treat a mental critical injury." },
     { id: "wealthy", name: "Wealthy", description: "Increase Resources by 1 (can be purchased multiple times)." },
+    { id: "performer", name: "Performer", description: "Ignore Conditions when making INSPIRATION or MANIPULATION tests." },
 ];
 
 const ARMOR_DEFINITIONS: ArmorDefinition[] = [
