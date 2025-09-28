@@ -2017,6 +2017,27 @@ if (confirmActionBtn) {
 if (cancelActionBtn) cancelActionBtn.addEventListener('click', closeConfirmationModal);
 if (closeConfirmationModalBtn) closeConfirmationModalBtn.addEventListener('click', closeConfirmationModal);
 
+// --- ADVANCEMENT NOTIFICATION MODAL ---
+const advancementNotificationModal = getEl<HTMLDivElement>('advancementNotificationModal');
+const closeAdvancementNotificationBtn = getEl<HTMLSpanElement>('closeAdvancementNotificationBtn');
+const closeAdvancementNotificationSecondaryBtn = getEl<HTMLButtonElement>('closeAdvancementNotificationSecondaryBtn');
+
+function openAdvancementNotificationModal() {
+    if (advancementNotificationModal) {
+        advancementNotificationModal.style.display = 'block';
+    }
+}
+
+function closeAdvancementNotificationModal() {
+    if (advancementNotificationModal) {
+        advancementNotificationModal.style.display = 'none';
+    }
+}
+
+// Event listeners for advancement notification modal
+if (closeAdvancementNotificationBtn) closeAdvancementNotificationBtn.addEventListener('click', closeAdvancementNotificationModal);
+if (closeAdvancementNotificationSecondaryBtn) closeAdvancementNotificationSecondaryBtn.addEventListener('click', closeAdvancementNotificationModal);
+
 
 function openModal(modal: HTMLDivElement | null) { if (modal) modal.style.display = 'block'; }
 function closeModal(modal: HTMLDivElement | null) { if (modal) modal.style.display = 'none'; }
@@ -2080,9 +2101,18 @@ function handleSpendFiveXp() {
         character.experiencePoints -= 5;
         updateSheetDisplay();
         saveCharacterToLocalStorage();
-        console.log("5 XP spent. Remember to: Add one point to a Skill, OR add a new Talent.");
+        
+        // Show advancement reminder notification
+        openAdvancementNotificationModal();
+        
+        console.log("5 XP spent. Character gained an Advance!");
     } else {
-        console.warn(`Not enough XP. You need at least 5 XP to spend. You only have ${character.experiencePoints} XP.`);
+        // Show error for insufficient XP
+        openConfirmationModal(
+            "Insufficient Experience Points",
+            `You need at least 5 XP to buy an Advance. You currently have ${character.experiencePoints} XP.\n\nGain more XP by answering development questions after mysteries!`,
+            () => {}
+        );
     }
 }
 
