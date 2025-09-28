@@ -630,14 +630,15 @@ const MENTAL_CRITICAL_INJURIES: CriticalInjuryDefinition[] = [
 const ALL_CRITICAL_TABLE_ITEMS = [...PHYSICAL_CRITICAL_INJURIES, ...MENTAL_CRITICAL_INJURIES];
 
 const XP_QUESTIONS: string[] = [
-    "Did you participate in the session?",
-    "Did you learn something new and important about the vaesen?",
-    "Did you learn something new and important about yourself or another player character?",
-    "Did you overcome a difficult obstacle or a dangerous enemy?",
-    "Did you risk something important for another person or for the group?",
-    "Did you use your Trauma, Dark Secret, or Memento in a way that affected the story?",
-    "Did you visit a new and exciting place?",
-    "(GM) Did you do something else that significantly drove the story forward or contributed to the fun of the group?"
+    "Did you participate in the session? (The character always gets at least 1 XP)",
+    "Did you confront any vaesen?",
+    "Did you identify a previously unknown vaesen?",
+    "Were you affected by your dark secret?",
+    "Did you take risks to protect other people?",
+    "Have you learned anything? (What?)",
+    "Did you develop something in your headquarters?",
+    "Did you perform an extraordinary action?",
+    "(Extra) Does your headquarters have the Annals of the Society facility?"
 ];
 
 interface ActionListItem { name: string; skill: string; }
