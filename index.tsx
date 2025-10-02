@@ -10,12 +10,12 @@ interface RelationshipItem {
     type: string;
 }
 
-interface InsightDefectItem {
+interface InsightAfflictionItem {
     id: string; // Unique id for the instance on the sheet
     originalId: string; // ID from the definition list
     name: string;
     effect: string;
-    type: 'Insight' | 'Defect' | 'Injury'; // To categorize
+    type: 'Insight' | 'Affliction' | 'Injury'; // To categorize
 }
 
 interface NoteItem {
@@ -55,7 +55,7 @@ interface Character {
     weapons: WeaponItem[];
     equipment: EquipmentItem[];
     discordWebhookUrl: string;
-    insightsAndDefects: InsightDefectItem[]; 
+    insightsAndAfflictions: InsightAfflictionItem[]; 
 }
 
 interface AttributeDefinition {
@@ -148,7 +148,7 @@ interface CriticalInjuryDefinition {
     id: string; // e.g., "physical_11", "mental_42"
     d66: string;
     injury: string;
-    status: 'Defect' | 'Insight' | 'Fatal' | 'Chronic'; // Simplified
+    status: 'Affliction' | 'Insight' | 'Fatal' | 'Chronic'; // Simplified
     timeLimit?: string; // e.g., "D6 days", "D6 rounds"
     effect: string;
     table: 'Physical' | 'Mental';
@@ -549,25 +549,25 @@ const GENERAL_EQUIPMENT_DEFINITIONS: GeneralEquipmentDefinition[] = [
 
 const PHYSICAL_CRITICAL_INJURIES: CriticalInjuryDefinition[] = [
     // From p.69 OCR
-    { id: "phys_11", d66: "11", injury: "Foot injury", status: "Defect", effect: "Limp, AGILITY −1", table: "Physical" },
-    { id: "phys_12", d66: "12", injury: "Broken fingers", status: "Defect", effect: "Crooked fingers, CLOSE COMBAT −1", table: "Physical" },
-    { id: "phys_13", d66: "13", injury: "Ruptured tendon", status: "Defect", effect: "Reduced mobility, AGILITY −1", table: "Physical" },
-    { id: "phys_14", d66: "14", injury: "Knee injury", status: "Defect", effect: "Skewed walk, AGILITY −1", table: "Physical" },
-    { id: "phys_15", d66: "15", injury: "Fracture", status: "Defect", effect: "False joint, FORCE −1", table: "Physical" },
-    { id: "phys_16", d66: "16", injury: "Splinters in the body", status: "Defect", effect: "Ulcer, INSPIRATION −1", table: "Physical" },
-    { id: "phys_21", d66: "21", injury: "Skin lesion", status: "Defect", effect: "Disfigured, MANIPULATION −1", table: "Physical" },
-    { id: "phys_22", d66: "22", injury: "Damaged throat", status: "Defect", effect: "Wheezing, STEALTH −1", table: "Physical" },
-    { id: "phys_23", d66: "23", injury: "Eye injury", status: "Defect", effect: "Impaired eyesight, VIGILANCE −1", table: "Physical" },
-    { id: "phys_24", d66: "24", injury: "Injured arm", status: "Defect", effect: "Crooked arm, RANGED COMBAT −1", table: "Physical" },
-    { id: "phys_25", d66: "25", injury: "Facial injury", status: "Defect", effect: "Deformed face, MANIPULATION −1", table: "Physical" },
-    { id: "phys_26", d66: "26", injury: "Crush injury", status: "Defect", effect: "Tremor, RANGED COMBAT −1", table: "Physical" },
-    { id: "phys_31", d66: "31", injury: "Dislodged teeth", status: "Defect", effect: "Toothless, INSPIRATION −1", table: "Physical" },
-    { id: "phys_32", d66: "32", injury: "Ear injury", status: "Defect", effect: "Impaired balance, CLOSE COMBAT −1", table: "Physical" },
-    { id: "phys_33", d66: "33", injury: "Jaw injury", status: "Defect", effect: "Drooling, INSPIRATION −1", table: "Physical" },
-    { id: "phys_34", d66: "34", injury: "Back injury", status: "Defect", effect: "Hunchback, AGILITY −1", table: "Physical" },
-    { id: "phys_35", d66: "35", injury: "Severed fingers", status: "Defect", effect: "Finger stumps, RANGED COMBAT −1", table: "Physical" },
-    { id: "phys_36", d66: "36", injury: "Nerve damage", status: "Defect", effect: "Pain, FORCE −1", table: "Physical" },
-    { id: "phys_41", d66: "41", injury: "Torn ear", status: "Defect", effect: "Impaired hearing, VIGILANCE −1", table: "Physical" },
+    { id: "phys_11", d66: "11", injury: "Foot injury", status: "Affliction", effect: "Limp, AGILITY −1", table: "Physical" },
+    { id: "phys_12", d66: "12", injury: "Broken fingers", status: "Affliction", effect: "Crooked fingers, CLOSE COMBAT −1", table: "Physical" },
+    { id: "phys_13", d66: "13", injury: "Ruptured tendon", status: "Affliction", effect: "Reduced mobility, AGILITY −1", table: "Physical" },
+    { id: "phys_14", d66: "14", injury: "Knee injury", status: "Affliction", effect: "Skewed walk, AGILITY −1", table: "Physical" },
+    { id: "phys_15", d66: "15", injury: "Fracture", status: "Affliction", effect: "False joint, FORCE −1", table: "Physical" },
+    { id: "phys_16", d66: "16", injury: "Splinters in the body", status: "Affliction", effect: "Ulcer, INSPIRATION −1", table: "Physical" },
+    { id: "phys_21", d66: "21", injury: "Skin lesion", status: "Affliction", effect: "Disfigured, MANIPULATION −1", table: "Physical" },
+    { id: "phys_22", d66: "22", injury: "Damaged throat", status: "Affliction", effect: "Wheezing, STEALTH −1", table: "Physical" },
+    { id: "phys_23", d66: "23", injury: "Eye injury", status: "Affliction", effect: "Impaired eyesight, VIGILANCE −1", table: "Physical" },
+    { id: "phys_24", d66: "24", injury: "Injured arm", status: "Affliction", effect: "Crooked arm, RANGED COMBAT −1", table: "Physical" },
+    { id: "phys_25", d66: "25", injury: "Facial injury", status: "Affliction", effect: "Deformed face, MANIPULATION −1", table: "Physical" },
+    { id: "phys_26", d66: "26", injury: "Crush injury", status: "Affliction", effect: "Tremor, RANGED COMBAT −1", table: "Physical" },
+    { id: "phys_31", d66: "31", injury: "Dislodged teeth", status: "Affliction", effect: "Toothless, INSPIRATION −1", table: "Physical" },
+    { id: "phys_32", d66: "32", injury: "Ear injury", status: "Affliction", effect: "Impaired balance, CLOSE COMBAT −1", table: "Physical" },
+    { id: "phys_33", d66: "33", injury: "Jaw injury", status: "Affliction", effect: "Drooling, INSPIRATION −1", table: "Physical" },
+    { id: "phys_34", d66: "34", injury: "Back injury", status: "Affliction", effect: "Hunchback, AGILITY −1", table: "Physical" },
+    { id: "phys_35", d66: "35", injury: "Severed fingers", status: "Affliction", effect: "Finger stumps, RANGED COMBAT −1", table: "Physical" },
+    { id: "phys_36", d66: "36", injury: "Nerve damage", status: "Affliction", effect: "Pain, FORCE −1", table: "Physical" },
+    { id: "phys_41", d66: "41", injury: "Torn ear", status: "Affliction", effect: "Impaired hearing, VIGILANCE −1", table: "Physical" },
     { id: "phys_42", d66: "42", injury: "Abdominal injury", status: "Fatal", timeLimit: "D6 days", effect: "Reduced mobility, CLOSE COMBAT −1", table: "Physical" },
     { id: "phys_43", d66: "43", injury: "Dirty wound", status: "Fatal", timeLimit: "D6 days", effect: "Sepsis, FORCE −1", table: "Physical" },
     { id: "phys_44", d66: "44", injury: "Bleeding wound", status: "Fatal", timeLimit: "D6 days", effect: "Gangrene, AGILITY −1", table: "Physical" },
@@ -589,25 +589,25 @@ const PHYSICAL_CRITICAL_INJURIES: CriticalInjuryDefinition[] = [
 
 const MENTAL_CRITICAL_INJURIES: CriticalInjuryDefinition[] = [
     // From p.70 OCR
-    { id: "ment_11", d66: "11", injury: "Confused", status: "Defect", effect: "Dazed, INVESTIGATION −1", table: "Mental" },
-    { id: "ment_12", d66: "12", injury: "Overwhelmed", status: "Defect", effect: "Sensitive to stress, STEALTH −1", table: "Mental" },
-    { id: "ment_13", d66: "13", injury: "Pushed too far", status: "Defect", effect: "Fanatic, MANIPULATION −1", table: "Mental" },
-    { id: "ment_14", d66: "14", injury: "Incapacitated", status: "Defect", effect: "Clumsy, AGILITY −1", table: "Mental" },
-    { id: "ment_15", d66: "15", injury: "Exhausted", status: "Defect", effect: "Claustrophobic, STEALTH −1", table: "Mental" },
-    { id: "ment_16", d66: "16", injury: "Panic attack", status: "Defect", effect: "Skittish, Fear −1", table: "Mental" },
-    { id: "ment_21", d66: "21", injury: "Sees her true self", status: "Defect", effect: "Compulsive liar, INSPIRATION −1", table: "Mental" },
-    { id: "ment_22", d66: "22", injury: "Frozen facial muscles", status: "Defect", effect: "Mask of terror, MANIPULATION −1", table: "Mental" },
-    { id: "ment_23", d66: "23", injury: "Whitened hair", status: "Defect", effect: "Aged, OBSERVATION −1", table: "Mental" },
-    { id: "ment_24", d66: "24", injury: "Feelings of worthlessness", status: "Defect", effect: "Shattered confidence, INSPIRATION −1", table: "Mental" },
-    { id: "ment_25", d66: "25", injury: "Paralyzed", status: "Defect", effect: "Lacks initiative, INVESTIGATION −1", table: "Mental" },
-    { id: "ment_26", d66: "26", injury: "Trembling", status: "Defect", effect: "Tremor, RANGED COMBAT −1", table: "Mental" },
-    { id: "ment_31", d66: "31", injury: "Confronted with mortality", status: "Defect", effect: "Fear of death, CLOSE COMBAT −1", table: "Mental" },
-    { id: "ment_32", d66: "32", injury: "Fighting and screaming", status: "Defect", effect: "Impaired impulse control, STEALTH −1", table: "Mental" },
-    { id: "ment_33", d66: "33", injury: "Divided attention", status: "Defect", effect: "Hears voices, LEARNING −1", table: "Mental" },
-    { id: "ment_34", d66: "34", injury: "Disgusted", status: "Defect", effect: "Hates filth, MEDICINE −1", table: "Mental" },
-    { id: "ment_35", d66: "35", injury: "Shaken", status: "Defect", effect: "Sentimental, MANIPULATION −1", table: "Mental" },
-    { id: "ment_36", d66: "36", injury: "Stressed", status: "Defect", effect: "Weakened immune system, FORCE −1", table: "Mental" },
-    { id: "ment_41", d66: "41", injury: "Extreme muscle tension", status: "Defect", effect: "High-strung, AGILITY −1", table: "Mental" },
+    { id: "ment_11", d66: "11", injury: "Confused", status: "Affliction", effect: "Dazed, INVESTIGATION −1", table: "Mental" },
+    { id: "ment_12", d66: "12", injury: "Overwhelmed", status: "Affliction", effect: "Sensitive to stress, STEALTH −1", table: "Mental" },
+    { id: "ment_13", d66: "13", injury: "Pushed too far", status: "Affliction", effect: "Fanatic, MANIPULATION −1", table: "Mental" },
+    { id: "ment_14", d66: "14", injury: "Incapacitated", status: "Affliction", effect: "Clumsy, AGILITY −1", table: "Mental" },
+    { id: "ment_15", d66: "15", injury: "Exhausted", status: "Affliction", effect: "Claustrophobic, STEALTH −1", table: "Mental" },
+    { id: "ment_16", d66: "16", injury: "Panic attack", status: "Affliction", effect: "Skittish, Fear −1", table: "Mental" },
+    { id: "ment_21", d66: "21", injury: "Sees her true self", status: "Affliction", effect: "Compulsive liar, INSPIRATION −1", table: "Mental" },
+    { id: "ment_22", d66: "22", injury: "Frozen facial muscles", status: "Affliction", effect: "Mask of terror, MANIPULATION −1", table: "Mental" },
+    { id: "ment_23", d66: "23", injury: "Whitened hair", status: "Affliction", effect: "Aged, OBSERVATION −1", table: "Mental" },
+    { id: "ment_24", d66: "24", injury: "Feelings of worthlessness", status: "Affliction", effect: "Shattered confidence, INSPIRATION −1", table: "Mental" },
+    { id: "ment_25", d66: "25", injury: "Paralyzed", status: "Affliction", effect: "Lacks initiative, INVESTIGATION −1", table: "Mental" },
+    { id: "ment_26", d66: "26", injury: "Trembling", status: "Affliction", effect: "Tremor, RANGED COMBAT −1", table: "Mental" },
+    { id: "ment_31", d66: "31", injury: "Confronted with mortality", status: "Affliction", effect: "Fear of death, CLOSE COMBAT −1", table: "Mental" },
+    { id: "ment_32", d66: "32", injury: "Fighting and screaming", status: "Affliction", effect: "Impaired impulse control, STEALTH −1", table: "Mental" },
+    { id: "ment_33", d66: "33", injury: "Divided attention", status: "Affliction", effect: "Hears voices, LEARNING −1", table: "Mental" },
+    { id: "ment_34", d66: "34", injury: "Disgusted", status: "Affliction", effect: "Hates filth, MEDICINE −1", table: "Mental" },
+    { id: "ment_35", d66: "35", injury: "Shaken", status: "Affliction", effect: "Sentimental, MANIPULATION −1", table: "Mental" },
+    { id: "ment_36", d66: "36", injury: "Stressed", status: "Affliction", effect: "Weakened immune system, FORCE −1", table: "Mental" },
+    { id: "ment_41", d66: "41", injury: "Extreme muscle tension", status: "Affliction", effect: "High-strung, AGILITY −1", table: "Mental" },
     { id: "ment_42", d66: "42", injury: "Traumatized", status: "Chronic", timeLimit: "D6 days", effect: "PTSD, Fear −1", table: "Mental" },
     { id: "ment_43", d66: "43", injury: "Furious", status: "Chronic", timeLimit: "D6 days", effect: "Capricious, MANIPULATION −1", table: "Mental" },
     { id: "ment_44", d66: "44", injury: "Abandoned", status: "Chronic", timeLimit: "D6 days", effect: "Lack of trust, MANIPULATION −1", table: "Mental" },
@@ -680,15 +680,15 @@ let noteIdCounter = 0;
 let relationshipIdCounter = 0;
 let weaponInstanceIdCounter = 0;
 let equipmentInstanceIdCounter = 0;
-let insightDefectIdCounter = 0;
+let insightAfflictionIdCounter = 0;
 
-function getNextIdForType(type: 'Note' | 'Relationship' | 'WeaponInst' | 'EquipmentInst' | 'InsightDefectInst'): string {
+function getNextIdForType(type: 'Note' | 'Relationship' | 'WeaponInst' | 'EquipmentInst' | 'InsightAfflictionInst'): string {
     switch (type) {
         case 'Note': noteIdCounter++; return `Note_${noteIdCounter}`;
         case 'Relationship': relationshipIdCounter++; return `Rel_${relationshipIdCounter}`;
         case 'WeaponInst': weaponInstanceIdCounter++; return `WeaponInst_${weaponInstanceIdCounter}`;
         case 'EquipmentInst': equipmentInstanceIdCounter++; return `EquipInst_${equipmentInstanceIdCounter}`;
-        case 'InsightDefectInst': insightDefectIdCounter++; return `IDInst_${insightDefectIdCounter}`;
+        case 'InsightAfflictionInst': insightAfflictionIdCounter++; return `IDInst_${insightAfflictionIdCounter}`;
         default: console.error("Unknown ID type:", type); return `Unknown_${Date.now()}`;
     }
 }
@@ -718,13 +718,13 @@ function initializeAllIdCounters(rawData: any | null) {
         relationshipIdCounter = getMaxIdSuffix(rawData.relationships, "Rel_");
         weaponInstanceIdCounter = getMaxIdSuffix(rawData.weapons, "WeaponInst_");
         equipmentInstanceIdCounter = getMaxIdSuffix(rawData.equipment, "EquipInst_");
-        insightDefectIdCounter = getMaxIdSuffix(rawData.insightsAndDefects, "IDInst_");
+        insightAfflictionIdCounter = getMaxIdSuffix(rawData.insightsAndAfflictions, "IDInst_");
     } else {
         noteIdCounter = 0;
         relationshipIdCounter = 0;
         weaponInstanceIdCounter = 0;
         equipmentInstanceIdCounter = 0;
-        insightDefectIdCounter = 0;
+        insightAfflictionIdCounter = 0;
     }
 }
 
@@ -779,10 +779,10 @@ function getNumericModifierFromString(bonusStr: string): number {
     return 0;
 }
 
-// Calculates modifier from insights/defects for a given stat (attribute or skill)
+// Calculates modifier from insights/afflictions for a given stat (attribute or skill)
 function getModifierForStatFromEffects(statName: string, isAttributeRoll: boolean): number {
     let totalEffectModifier = 0;
-    if (!character || !character.insightsAndDefects) return 0;
+    if (!character || !character.insightsAndAfflictions) return 0;
 
     const primaryStatUpper = statName.toUpperCase();
     let parentAttributeUpper = "";
@@ -794,7 +794,7 @@ function getModifierForStatFromEffects(statName: string, isAttributeRoll: boolea
         }
     }
 
-    for (const item of character.insightsAndDefects) {
+    for (const item of character.insightsAndAfflictions) {
         const effectUpper = item.effect.toUpperCase();
         // Regex to find a potential stat name (letters and spaces) followed by +/-, then a number
         const regex = /([A-Z\s]+?)\s*([+\-−])\s*(\d+)/g;
@@ -864,12 +864,12 @@ function getDefaultCharacter(): Character {
         weapons: [],
         equipment: [],
         discordWebhookUrl: "",
-        insightsAndDefects: [] 
+        insightsAndAfflictions: [] 
     };
 }
 
 // --- DATA MIGRATION HELPERS (for load/import) ---
-const migrateListIds = <T extends {id: string}>(items: any[] | undefined, idPrefix: 'Note' | 'Relationship' | 'WeaponInst' | 'EquipmentInst' | 'InsightDefectInst', defaultProps: Partial<T> = {}): T[] => {
+const migrateListIds = <T extends {id: string}>(items: any[] | undefined, idPrefix: 'Note' | 'Relationship' | 'WeaponInst' | 'EquipmentInst' | 'InsightAfflictionInst', defaultProps: Partial<T> = {}): T[] => {
     if (!Array.isArray(items)) return [];
     return items.map((item: any) => ({
         ...defaultProps,
@@ -906,7 +906,7 @@ function init() {
     renderArmor();
     renderWeapons();
     renderEquipment();
-    renderInsightsAndDefects();
+    renderInsightsAndAfflictions();
     renderNotes(); 
     
     setupEventListeners(); 
@@ -951,8 +951,8 @@ function populateDropdowns() {
         resourceSelect.appendChild(option);
     });
 
-    const insightDefectSelect = getEl<HTMLSelectElement>('addInsightDefectSelect');
-    insightDefectSelect.innerHTML = '<option value="">-- Select an Insight or Defect --</option>';
+    const insightAfflictionSelect = getEl<HTMLSelectElement>('addInsightAfflictionSelect');
+    insightAfflictionSelect.innerHTML = '<option value="">-- Select an Insight or Affliction --</option>';
     
     const physicalItems = ALL_CRITICAL_TABLE_ITEMS.filter(item => item.table === 'Physical');
     const mentalItems = ALL_CRITICAL_TABLE_ITEMS.filter(item => item.table === 'Mental');
@@ -966,7 +966,7 @@ function populateDropdowns() {
         option.title = item.effect;
         physicalOptgroup.appendChild(option);
     });
-    insightDefectSelect.appendChild(physicalOptgroup);
+    insightAfflictionSelect.appendChild(physicalOptgroup);
 
     const mentalOptgroup = document.createElement('optgroup');
     mentalOptgroup.label = 'Mental Critical Items';
@@ -977,7 +977,7 @@ function populateDropdowns() {
         option.title = item.effect;
         mentalOptgroup.appendChild(option);
     });
-    insightDefectSelect.appendChild(mentalOptgroup);
+    insightAfflictionSelect.appendChild(mentalOptgroup);
 }
 
 // --- RENDERING FUNCTIONS ---
@@ -1358,17 +1358,17 @@ function renderEquipment() {
     });
 }
 
-function renderInsightsAndDefects() {
-    const container = getEl<HTMLDivElement>('insightsDefectsListContainer');
+function renderInsightsAndAfflictions() {
+    const container = getEl<HTMLDivElement>('insightsAfflictionsListContainer');
     container.innerHTML = '';
-    if (!character.insightsAndDefects || character.insightsAndDefects.length === 0) {
+    if (!character.insightsAndAfflictions || character.insightsAndAfflictions.length === 0) {
         const p = document.createElement('p');
-        p.textContent = 'No insights or defects added.';
+        p.textContent = 'No insights or afflictions added.';
         p.style.fontStyle = 'italic';
         container.appendChild(p);
         return;
     }
-    character.insightsAndDefects.forEach(item => {
+    character.insightsAndAfflictions.forEach(item => {
         const itemDiv = document.createElement('div');
         itemDiv.classList.add('listed-item');
         itemDiv.dataset.itemId = item.id; 
@@ -1387,8 +1387,8 @@ function renderInsightsAndDefects() {
         deleteButton.textContent = 'Delete';
         deleteButton.classList.add('delete-button');
         deleteButton.addEventListener('click', () => {
-            character.insightsAndDefects = character.insightsAndDefects.filter(idItem => idItem.id !== item.id);
-            renderInsightsAndDefects();
+            character.insightsAndAfflictions = character.insightsAndAfflictions.filter(idItem => idItem.id !== item.id);
+            renderInsightsAndAfflictions();
             updateCalculations(); // Recalculate skill dice pools
             saveCharacterToLocalStorage();
         });
@@ -1695,8 +1695,8 @@ function updateCalculations() {
             totalSheetModifier += character.armor.agilityPenalty; 
         }
         
-        const insightDefectModForSkill = getModifierForStatFromEffects(skillDef.name, false);
-        totalSheetModifier += insightDefectModForSkill;
+        const insightAfflictionModForSkill = getModifierForStatFromEffects(skillDef.name, false);
+        totalSheetModifier += insightAfflictionModForSkill;
         
         if (conditionModCell) conditionModCell.textContent = totalSheetModifier.toString();
         
@@ -1772,7 +1772,7 @@ function updateSheetDisplay() {
     renderResourcesTable(); 
     renderTalents(); 
     renderRelationships();
-    renderArmor(); renderWeapons(); renderEquipment(); renderInsightsAndDefects(); renderNotes();
+    renderArmor(); renderWeapons(); renderEquipment(); renderInsightsAndAfflictions(); renderNotes();
     safeUpdate('talentsOther', character.otherTalents);
     safeUpdate('experiencePoints', character.experiencePoints, 'value', false); 
     safeUpdate('advantages', character.advantages);
@@ -1803,7 +1803,7 @@ function loadCharacterFromLocalStorage(): Character | null {
             const finalRelationships = migrateListIds<RelationshipItem>(parsedData.relationships, 'Relationship', { pcName: "", type: "" });
             const finalWeapons = migrateWeaponEquipmentIds<WeaponItem>(parsedData.weapons, 'WeaponInst', WEAPON_DEFINITIONS);
             const finalEquipment = migrateWeaponEquipmentIds<EquipmentItem>(parsedData.equipment, 'EquipmentInst', GENERAL_EQUIPMENT_DEFINITIONS);
-            const finalInsightsDefects = migrateListIds<InsightDefectItem>(parsedData.insightsAndDefects, 'InsightDefectInst', { originalId: "", name: "", effect: "", type: "Defect" });
+            const finalInsightsAfflictions = migrateListIds<InsightAfflictionItem>(parsedData.insightsAndAfflictions, 'InsightAfflictionInst', { originalId: "", name: "", effect: "", type: "Affliction" });
 
 
             return {
@@ -1826,7 +1826,7 @@ function loadCharacterFromLocalStorage(): Character | null {
                 relationships: finalRelationships,
                 weapons: finalWeapons,
                 equipment: finalEquipment,
-                insightsAndDefects: finalInsightsDefects,
+                insightsAndAfflictions: finalInsightsAfflictions,
                 resources: (typeof parsedData.resources === 'number' && parsedData.resources >= 1 && parsedData.resources <= 8) ? parsedData.resources : defaultChar.resources,
             };
         } catch (e) { console.error("Error parsing character from local storage:", e); localStorage.removeItem(LOCAL_STORAGE_KEY); return null; }
@@ -2090,7 +2090,7 @@ function handleAddRandomInjury(tableType: 'Physical' | 'Mental') {
     const injuryTable = tableType === 'Physical' ? PHYSICAL_CRITICAL_INJURIES : MENTAL_CRITICAL_INJURIES;
     
     const availableInjuries = injuryTable.filter(injuryDef => 
-        !character.insightsAndDefects.find(item => item.originalId === injuryDef.id)
+        !character.insightsAndAfflictions.find(item => item.originalId === injuryDef.id)
     );
 
     if (availableInjuries.length === 0) {
@@ -2101,18 +2101,18 @@ function handleAddRandomInjury(tableType: 'Physical' | 'Mental') {
     const randomIndex = Math.floor(Math.random() * availableInjuries.length);
     const selectedInjuryDef = availableInjuries[randomIndex];
 
-    const type: 'Insight' | 'Defect' | 'Injury' = selectedInjuryDef.status === 'Insight' ? 'Insight' : 
-                                            (selectedInjuryDef.status === 'Fatal' || selectedInjuryDef.status === 'Chronic' ? 'Injury' : 'Defect');
+    const type: 'Insight' | 'Affliction' | 'Injury' = selectedInjuryDef.status === 'Insight' ? 'Insight' : 
+                                            (selectedInjuryDef.status === 'Fatal' || selectedInjuryDef.status === 'Chronic' ? 'Injury' : 'Affliction');
     
-    character.insightsAndDefects.push({
-        id: getNextIdForType('InsightDefectInst'),
+    character.insightsAndAfflictions.push({
+        id: getNextIdForType('InsightAfflictionInst'),
         originalId: selectedInjuryDef.id,
         name: selectedInjuryDef.injury,
         effect: selectedInjuryDef.effect,
         type: type
     });
 
-    renderInsightsAndDefects();
+    renderInsightsAndAfflictions();
     updateCalculations();
     saveCharacterToLocalStorage();
     console.log(`"${selectedInjuryDef.injury}" (${type}) added as a random ${tableType.toLowerCase()} item.`);
@@ -2123,7 +2123,7 @@ interface RollDetails {
     name: string;                 // Display name of the roll
     basePool: number;             // Attribute (+ Skill if applicable)
     conditionMod: number;
-    insightDefectMod: number;
+    insightAfflictionMod: number;
     externalBonusValue: number;   // Bonus from weapon, equipment, etc.
     externalBonusLabel: string;   // "Weapon", "Equipment", or ""
     gmMod: number; // Represents "Other Dice"
@@ -2142,13 +2142,13 @@ function updateDiceRollModalFinalPool() {
 
     const basePool = currentRollDetails.basePool;
     const condMod = currentRollDetails.conditionMod;
-    const insightDefectMod = currentRollDetails.insightDefectMod;
+    const insightAfflictionMod = currentRollDetails.insightAfflictionMod;
     const externalBonus = currentRollDetails.externalBonusValue;
     const gmMod = parseInt(getEl<HTMLInputElement>('gmModifierInput').value, 10) || 0;
 
     currentRollDetails.gmMod = gmMod;
 
-    const finalPool = Math.max(0, basePool + condMod + insightDefectMod + externalBonus + gmMod);
+    const finalPool = Math.max(0, basePool + condMod + insightAfflictionMod + externalBonus + gmMod);
     getEl<HTMLSpanElement>('diceRollFinalPoolDisplay').textContent = finalPool.toString();
     currentRollDetails.finalPool = finalPool;
     return finalPool;
@@ -2164,7 +2164,7 @@ function openDiceRollModal(
 ) {
     let calculatedBasePool = 0;
     let attributeForConditionAndPushCheck = ""; 
-    let itemForInsightDefectCheck = itemName; 
+    let itemForInsightAfflictionCheck = itemName; 
     let displayName = itemName;
 
     if (rollType === 'attribute') {
@@ -2174,16 +2174,16 @@ function openDiceRollModal(
         calculatedBasePool = (character.attributes[baseAttributeName] || 0) + (character.skills[itemName] || 0);
         if (baseSkillName) { // If called from equipment or weapon, itemName is descriptive, baseSkillName is the actual skill
             calculatedBasePool = (character.attributes[baseAttributeName] || 0) + (character.skills[baseSkillName] || 0);
-            itemForInsightDefectCheck = baseSkillName;
+            itemForInsightAfflictionCheck = baseSkillName;
         } else { // direct skill roll, itemName is the skill
-             itemForInsightDefectCheck = itemName;
+             itemForInsightAfflictionCheck = itemName;
         }
         attributeForConditionAndPushCheck = baseAttributeName;
     } else if (rollType === 'weapon' && baseSkillName && baseAttributeName) { // Specifically for weapons
         displayName = itemName; // itemName is already "Attack with X (Skill)"
         calculatedBasePool = (character.attributes[baseAttributeName] || 0) + (character.skills[baseSkillName] || 0);
         attributeForConditionAndPushCheck = baseAttributeName;
-        itemForInsightDefectCheck = baseSkillName;
+        itemForInsightAfflictionCheck = baseSkillName;
     }
 
 
@@ -2198,13 +2198,13 @@ function openDiceRollModal(
         conditionModifier += character.armor.agilityPenalty;
     }
 
-    const insightDefectModifier = getModifierForStatFromEffects(itemForInsightDefectCheck, rollType === 'attribute');
+    const insightAfflictionModifier = getModifierForStatFromEffects(itemForInsightAfflictionCheck, rollType === 'attribute');
 
     currentRollDetails = {
         name: displayName,
         basePool: calculatedBasePool,
         conditionMod: conditionModifier,
-        insightDefectMod: insightDefectModifier,
+        insightAfflictionMod: insightAfflictionModifier,
         externalBonusValue: appliedExternalBonusValue,
         externalBonusLabel: appliedExternalBonusLabel,
         gmMod: 0,
@@ -2219,7 +2219,7 @@ function openDiceRollModal(
     getEl<HTMLSpanElement>('rollNameDisplay').textContent = currentRollDetails.name;
     getEl<HTMLSpanElement>('diceRollBasePoolDisplay').textContent = currentRollDetails.basePool.toString();
     getEl<HTMLSpanElement>('diceRollConditionModDisplay').textContent = currentRollDetails.conditionMod.toString();
-    getEl<HTMLSpanElement>('diceRollInsightDefectModDisplay').textContent = currentRollDetails.insightDefectMod.toString();
+    getEl<HTMLSpanElement>('diceRollInsightAfflictionModDisplay').textContent = currentRollDetails.insightAfflictionMod.toString();
     
     const extBonusLineEl = getEl<HTMLParagraphElement>('externalBonusLine');
     const extBonusLabelEl = getEl<HTMLSpanElement>('diceRollExternalBonusLabel');
@@ -2288,7 +2288,7 @@ async function sendRollToDiscord() {
     const characterDisplayName = character.name || 'Character';
 
     let discordMessage = `**${characterDisplayName} rolled for ${currentRollDetails.name}** ${currentRollDetails.isPushed ? " (Pushed)" : ""}\n`;
-    discordMessage += `Base: ${currentRollDetails.basePool}, Cond: ${currentRollDetails.conditionMod}, I/D: ${currentRollDetails.insightDefectMod}\n`;
+    discordMessage += `Base: ${currentRollDetails.basePool}, Cond: ${currentRollDetails.conditionMod}, I/D: ${currentRollDetails.insightAfflictionMod}\n`;
     
     let externalBonusText = "";
     if (currentRollDetails.externalBonusValue !== 0 && currentRollDetails.externalBonusLabel) {
@@ -2571,8 +2571,8 @@ function updateFearTestModalDisplays() {
             condMod--;
         }
     });
-     // Add modifiers from insights/defects specifically mentioning "Fear +/-X"
-    character.insightsAndDefects.forEach(item => {
+     // Add modifiers from insights/afflictions specifically mentioning "Fear +/-X"
+    character.insightsAndAfflictions.forEach(item => {
         const effectLower = item.effect.toLowerCase();
         const fearMatch = effectLower.match(/fear\s*([+\-−])\s*(\d+)/);
         if (fearMatch) {
@@ -2741,7 +2741,7 @@ function handleClearCharacterSheet() {
             renderArmor();
             renderWeapons();
             renderEquipment();
-            renderInsightsAndDefects();
+            renderInsightsAndAfflictions();
             renderNotes(); 
             
             updateSheetDisplay(); 
@@ -2919,30 +2919,30 @@ function setupEventListeners() {
     });
 
 
-    const insightDefectSelect = getEl<HTMLSelectElement>('addInsightDefectSelect');
-    const insightDefectDesc = getEl<HTMLDivElement>('selectedInsightDefectDescription');
-    if (insightDefectSelect && insightDefectDesc) {
-        insightDefectSelect.addEventListener('change', () => {
-            const selectedId = insightDefectSelect.value;
+    const insightAfflictionSelect = getEl<HTMLSelectElement>('addInsightAfflictionSelect');
+    const insightAfflictionDesc = getEl<HTMLDivElement>('selectedInsightAfflictionDescription');
+    if (insightAfflictionSelect && insightAfflictionDesc) {
+        insightAfflictionSelect.addEventListener('change', () => {
+            const selectedId = insightAfflictionSelect.value;
             const itemDef = ALL_CRITICAL_TABLE_ITEMS.find(i => i.id === selectedId);
-            insightDefectDesc.textContent = itemDef ? `Effect: ${itemDef.effect}` : 'Select an item to see its effect.';
-            updateSelectTooltip(insightDefectSelect);
+            insightAfflictionDesc.textContent = itemDef ? `Effect: ${itemDef.effect}` : 'Select an item to see its effect.';
+            updateSelectTooltip(insightAfflictionSelect);
         });
     }
-    addListener('confirmAddInsightDefectBtn', 'click', () => {
-        const selectedId = getEl<HTMLSelectElement>('addInsightDefectSelect').value;
+    addListener('confirmAddInsightAfflictionBtn', 'click', () => {
+        const selectedId = getEl<HTMLSelectElement>('addInsightAfflictionSelect').value;
         const itemDef = ALL_CRITICAL_TABLE_ITEMS.find(i => i.id === selectedId);
-        if (itemDef && !character.insightsAndDefects.find(item => item.originalId === selectedId)) { 
-            const type = itemDef.status === 'Insight' ? 'Insight' : (itemDef.status === 'Fatal' || itemDef.status === 'Chronic' ? 'Injury' : 'Defect');
-            character.insightsAndDefects.push({ id: getNextIdForType('InsightDefectInst'), originalId: itemDef.id, name: itemDef.injury, effect: itemDef.effect, type });
-            renderInsightsAndDefects();
+        if (itemDef && !character.insightsAndAfflictions.find(item => item.originalId === selectedId)) { 
+            const type = itemDef.status === 'Insight' ? 'Insight' : (itemDef.status === 'Fatal' || itemDef.status === 'Chronic' ? 'Injury' : 'Affliction');
+            character.insightsAndAfflictions.push({ id: getNextIdForType('InsightAfflictionInst'), originalId: itemDef.id, name: itemDef.injury, effect: itemDef.effect, type });
+            renderInsightsAndAfflictions();
             updateCalculations();
             saveCharacterToLocalStorage();
         } else if (itemDef) {
             console.warn(`"${itemDef.injury}" has already been added.`);
         }
-        getEl<HTMLSelectElement>('addInsightDefectSelect').value = ""; 
-        if (insightDefectDesc) insightDefectDesc.textContent = 'Select an item to see its effect.'; 
+        getEl<HTMLSelectElement>('addInsightAfflictionSelect').value = ""; 
+        if (insightAfflictionDesc) insightAfflictionDesc.textContent = 'Select an item to see its effect.'; 
     });
 
     addListener('addRandomPhysicalInjuryBtn', 'click', () => handleAddRandomInjury('Physical'));
@@ -3039,7 +3039,7 @@ function importCharacter(event: Event) {
                 const finalRelationships = migrateListIds<RelationshipItem>(importedParsedData.relationships, 'Relationship', { pcName: "", type: "" });
                 const finalWeapons = migrateWeaponEquipmentIds<WeaponItem>(importedParsedData.weapons, 'WeaponInst', WEAPON_DEFINITIONS);
                 const finalEquipment = migrateWeaponEquipmentIds<EquipmentItem>(importedParsedData.equipment, 'EquipmentInst', GENERAL_EQUIPMENT_DEFINITIONS);
-                const finalInsightsDefects = migrateListIds<InsightDefectItem>(importedParsedData.insightsAndDefects, 'InsightDefectInst', { originalId: "", name: "", effect: "", type: "Defect" });
+                const finalInsightsAfflictions = migrateListIds<InsightAfflictionItem>(importedParsedData.insightsAndAfflictions, 'InsightAfflictionInst', { originalId: "", name: "", effect: "", type: "Affliction" });
 
                 // Assign to the global character object, merging deeply and correctly
                 character = {
@@ -3063,7 +3063,7 @@ function importCharacter(event: Event) {
                     relationships: finalRelationships,
                     weapons: finalWeapons,
                     equipment: finalEquipment,
-                    insightsAndDefects: finalInsightsDefects,
+                    insightsAndAfflictions: finalInsightsAfflictions,
                     resources: (typeof importedParsedData.resources === 'number' && importedParsedData.resources >= 1 && importedParsedData.resources <= 8) ? importedParsedData.resources : defaultChar.resources,
                 };
                 // End migration logic

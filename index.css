@@ -1096,7 +1096,7 @@ footer p {
     margin-bottom: 0; 
 }
 
-.insights-defects .header-buttons-group button {
+.insights-afflictions .header-buttons-group button {
     padding: 6px 9px; 
     font-size: 0.8em; 
 }
@@ -1251,7 +1251,7 @@ select optgroup {
     .char-info { grid-column: span 2; } 
     .stacked-attributes-combat-gear-wrapper { grid-column: span 2; } 
     .relationships { grid-column: span 2; }
-    .insights-defects { grid-column: span 2; }
+    .insights-afflictions { grid-column: span 2; }
     .skills { grid-column: span 2; }
     .talents { grid-column: span 2; }
     .notes { grid-column: span 2; }
@@ -1273,7 +1273,7 @@ select optgroup {
     .char-info { grid-column: span 3; } 
     .stacked-attributes-combat-gear-wrapper { grid-column: span 3; } 
     .relationships { grid-column: span 3; }
-    .insights-defects { grid-column: span 3; }
+    .insights-afflictions { grid-column: span 3; }
     .skills { grid-column: span 3; }
     .talents { grid-column: span 3; }
     .notes { grid-column: span 6; } 

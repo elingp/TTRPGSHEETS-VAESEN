@@ -17,13 +17,13 @@ The sheet integrates various rulebook elements for quick reference, automates so
     *   Select and manage Talents (Archetype-specific and general).
     *   Add and manage Relationships with other player characters.
     *   Equip and manage Armor, Weapons, and general Equipment.
-    *   Track Insights, Defects, and Critical Injuries.
+    *   Track Insights, Afflictions, and Critical Injuries.
     *   Keep session notes directly on the sheet.
 *   **Dynamic Calculations**:
-    *   Automatic calculation of dice pools for skills, factoring in attributes, skill ranks, conditions, armor penalties, and modifiers from insights/defects.
+    *   Automatic calculation of dice pools for skills, factoring in attributes, skill ranks, conditions, armor penalties, and modifiers from insights/afflictions.
 *   **Dice Rolling**:
     *   Integrated dice roller for attributes, skills, and weapon attacks.
-    *   Rolls automatically include relevant modifiers (conditions, insights/defects, weapon/equipment bonuses).
+    *   Rolls automatically include relevant modifiers (conditions, insights/afflictions, weapon/equipment bonuses).
     *   Option to add "Other Dice" (e.g., GM modifiers).
     *   Support for pushing rolls.
     *   Optional Discord integration to send roll results to a specified webhook.

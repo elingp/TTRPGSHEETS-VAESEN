@@ -36,13 +36,13 @@
     .sub-section-header button, .card-header-line button, .card-header-line .header-buttons-group,
     .close-button, .webhook-info, #discordWebhookUrl, #rollLogDisplay,
     #openAddRelationshipModalBtn, #openArmorModalBtn, #openWeaponModalBtn, #openEquipmentModalBtn,
-    #openAddTalentModalBtn, #addNewNoteBtn, #confirmAddInsightDefectBtn,
+    #openAddTalentModalBtn, #addNewNoteBtn, #confirmAddInsightAfflictionBtn,
     #addRandomPhysicalInjuryBtn, #addRandomMentalInjuryBtn,
     #gmModifierInput, /* Input for GM dice mod */
     #archetypeTalentDescription, /* Archetype talent description that shows on screen */
     .talent-description-modal, .item-description-modal, /* Descriptions in modals */
     .conditions-explanation, /* Small help text for conditions */
-    #selectedInsightDefectDescription, /* Description for selected insight/defect before adding */
+    #selectedInsightAfflictionDescription, /* Description for selected insight/affliction before adding */
     .quick-actions-panel /* Hide the new quick actions panel */
      {
         display: none !important;
@@ -257,6 +257,6 @@
     /* PAGE 2 - These selectors should find the cards even if nested for screen */
     .sheet-grid .talents.card { grid-column: 1 / 3 !important; grid-row: 4 / 5 !important; page-break-before: always !important;}
     .sheet-grid .skills.card { grid-column: 1 / 3 !important; grid-row: 7 / 8 !important; } /* Assuming talents, relationships, insights take up rows 4,5,6 effectively */
-    .sheet-grid .insights-defects.card { grid-column: 1 / 3 !important; grid-row: 9 / 10 !important;}
+    .sheet-grid .insights-afflictions.card { grid-column: 1 / 3 !important; grid-row: 9 / 10 !important;}
     .sheet-grid .notes.card { grid-column: 1 / 3 !important; grid-row: 11 / 12 !important;}
 }

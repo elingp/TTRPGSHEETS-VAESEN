@@ -203,23 +203,23 @@
                 <button id="openAddRelationshipModalBtn">Add Relationship</button>
             </section>
             
-            <section class="insights-defects card">
-                <h2>Insights & Defects</h2>
+            <section class="insights-afflictions card">
+                <h2>Insights & Afflictions</h2>
                 <div class="inline-field-group card-header-line">
-                    <label for="addInsightDefectSelect">Select Injury/Insight:</label>
-                    <select id="addInsightDefectSelect">
+                    <label for="addInsightAfflictionSelect">Select Injury/Insight:</label>
+                    <select id="addInsightAfflictionSelect">
                         <option value="">-- Select an item --</option>
                         <!-- Populated by JS -->
                     </select>
                 </div>
-                 <div id="selectedInsightDefectDescription" class="item-description-modal" style="min-height: 40px; margin-bottom:10px;">Select an item to see its effect.</div>
+                 <div id="selectedInsightAfflictionDescription" class="item-description-modal" style="min-height: 40px; margin-bottom:10px;">Select an item to see its effect.</div>
                 <div class="header-buttons-group" style="margin-bottom: 10px;">
-                    <button id="confirmAddInsightDefectBtn">Add Selected</button>
+                    <button id="confirmAddInsightAfflictionBtn">Add Selected</button>
                     <button id="addRandomPhysicalInjuryBtn">Random Physical</button>
                     <button id="addRandomMentalInjuryBtn">Random Mental</button>
                 </div>
-                <div id="insightsDefectsListContainer" class="item-list-container" style="margin-top:5px;">
-                    <!-- Added insights and defects will appear here -->
+                <div id="insightsAfflictionsListContainer" class="item-list-container" style="margin-top:5px;">
+                    <!-- Added insights and afflictions will appear here -->
                 </div>
             </section>
 
@@ -428,7 +428,7 @@
             <div class="dice-pool-calculation">
                 <p>Base Pool (Attr+Skill): <strong id="diceRollBasePoolDisplay">0</strong></p>
                 <p>Condition Modifier: <strong id="diceRollConditionModDisplay">0</strong></p>
-                <p>Insight/Defect Modifier: <strong id="diceRollInsightDefectModDisplay">0</strong></p>
+                <p>Insight/Affliction Modifier: <strong id="diceRollInsightAfflictionModDisplay">0</strong></p>
                 <p id="externalBonusLine" style="display: none;"><span id="diceRollExternalBonusLabel">Item</span> Bonus: <strong id="diceRollExternalBonusValueDisplay">0</strong></p>
                 <div class="inline-field-group">
                     <label for="gmModifierInput" style="margin-right: 5px;">Other Dice:</label>
