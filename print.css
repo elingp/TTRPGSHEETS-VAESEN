@@ -35,7 +35,7 @@
     .listed-item .actions, .relationship-item-actions, .note-item-buttons,
     .sub-section-header button, .card-header-line button, .card-header-line .header-buttons-group,
     .close-button, .webhook-info, #discordWebhookUrl, #rollLogDisplay,
-    #openAddRelationshipModalBtn, #openArmorModalBtn, #openWeaponModalBtn, #openEquipmentModalBtn,
+    #openAddRelationshipModalBtn, #openArmorModalBtn, #openWeaponModalBtn, #openGearModalBtn,
     #openAddTalentModalBtn, #addNewNoteBtn, #confirmAddInsightAfflictionBtn,
     #addRandomPhysicalInjuryBtn, #addRandomMentalInjuryBtn,
     #gmModifierInput, /* Input for GM dice mod */
@@ -236,7 +236,7 @@
     #talentsOther { height: 2.5em; }
 
     /* Adjust sub-section within combat-gear for print */
-    .combat-gear-card .combat-gear-columns { display: block !important; } /* Stack armor/weapons/equipment within the card */
+    .combat-gear-card .combat-gear-columns { display: block !important; } /* Stack armor/weapons/gear within the card */
     .combat-gear-card .combat-gear-column { margin-bottom: 5px; }
     .sub-section { padding: 3px; margin-bottom: 5px; }
     .sub-section-header h3 { font-size: 9pt !important; }

@@ -16,14 +16,14 @@ The sheet integrates various rulebook elements for quick reference, automates so
     *   Record Resources, Capital, and manage current resource values.
     *   Select and manage Talents (Archetype-specific and general).
     *   Add and manage Relationships with other player characters.
-    *   Equip and manage Armor, Weapons, and general Equipment.
+    *   Equip and manage Armor, Weapons, and general Gear.
     *   Track Insights, Afflictions, and Critical Injuries.
     *   Keep session notes directly on the sheet.
 *   **Dynamic Calculations**:
     *   Automatic calculation of dice pools for skills, factoring in attributes, skill ranks, conditions, armor penalties, and modifiers from insights/afflictions.
 *   **Dice Rolling**:
     *   Integrated dice roller for attributes, skills, and weapon attacks.
-    *   Rolls automatically include relevant modifiers (conditions, insights/afflictions, weapon/equipment bonuses).
+    *   Rolls automatically include relevant modifiers (conditions, insights/afflictions, weapon/gear bonuses).
     *   Option to add "Other Dice" (e.g., GM modifiers).
     *   Support for pushing rolls.
     *   Optional Discord integration to send roll results to a specified webhook.
@@ -34,7 +34,7 @@ The sheet integrates various rulebook elements for quick reference, automates so
     *   Character data is saved locally in the browser's localStorage.
     *   Import and Export character data as JSON files for backup or transfer.
 *   **Rulebook Integration**:
-    *   Dropdowns populated with options from the Vaesen core rulebook (e.g., Archetypes, Mementos, Talents, Equipment).
+    *   Dropdowns populated with options from the Vaesen core rulebook (e.g., Archetypes, Mementos, Talents, Gear).
     *   Descriptions and effects for many items and talents available for quick reference.
 
 ## How to Use
@@ -45,7 +45,7 @@ The sheet integrates various rulebook elements for quick reference, automates so
     *   Use the "Sheet Actions" > "Export JSON" button to save your character to a file.
     *   Use the "Sheet Actions" > "Import JSON" button to load a previously saved character file.
 4.  **Dice Rolling**:
-    *   Click the "Roll" button next to an attribute or skill, or the "Use" button for weapons/equipment that trigger rolls.
+    *   Click the "Roll" button next to an attribute or skill, or the "Use" button for weapons/gear that trigger rolls.
     *   A modal will appear showing the dice pool calculation. You can add "Other Dice" (e.g., GM modifiers) before rolling.
     *   Optionally, configure a Discord Webhook URL under "Sheet Actions" > "Discord Settings" to send roll results to a Discord channel.
 

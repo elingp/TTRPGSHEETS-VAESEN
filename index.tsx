@@ -53,7 +53,7 @@ interface Character {
     notes: NoteItem[];
     armor: ArmorItem | null;
     weapons: WeaponItem[];
-    equipment: EquipmentItem[];
+    gear: GearItem[];
     discordWebhookUrl: string;
     insightsAndAfflictions: InsightAfflictionItem[]; 
 }
@@ -79,7 +79,7 @@ interface ArchetypeDefinition {
     mainSkill: string;
     talentChoices: string[]; 
     resourceRange: [number, number]; 
-    startingEquipment: string[];
+    personalGear: string[];
     motivations: string[];
     traumas: string[];
     darkSecrets: string[];
@@ -124,7 +124,7 @@ interface ArmorDefinition {
     type: 'Light' | 'Medium' | 'Heavy';
     protection: number;
     agilityPenalty: number;
-    availability: number;
+    cost: number;
 }
 interface WeaponDefinition {
     id: string;
@@ -133,14 +133,14 @@ interface WeaponDefinition {
     range: string;
     bonus: string; 
     skill: string; 
-    availability: number;
+    cost: number;
     type: 'Melee' | 'Ranged';
 }
-interface GeneralEquipmentDefinition {
+interface GeneralGearDefinition {
     id: string;
     name: string;
     bonus: string; 
-    availability: number;
+    cost: number;
     effect: string;
 }
 
@@ -157,7 +157,7 @@ interface CriticalInjuryDefinition {
 
 interface ArmorItem extends ArmorDefinition {}
 interface WeaponItem extends WeaponDefinition { instanceId: string; }
-interface EquipmentItem extends GeneralEquipmentDefinition { instanceId: string; }
+interface GearItem extends GeneralGearDefinition { instanceId: string; }
 
 
 // --- RULEBOOK DATA CONSTANTS ---
@@ -201,7 +201,7 @@ const ARCHETYPES_LIST: ArchetypeDefinition[] = [
         name: "Academic", mainAttribute: "Logic", mainSkill: "Learning", 
         talentChoices: ["Bookworm", "Erudite", "Knowledge is Reassuring"], 
         resourceRange: [4, 6], 
-        startingEquipment: ["Book collection or map book", "Writing utensils", "Liquor or slide rule"],
+        personalGear: ["Book collection or map book", "Writing utensils", "Liquor or slide rule"],
         motivations: ["Charting the unknown", "Proving my critics wrong", "Becoming famous"],
         traumas: ["Vaettir turned you into a rat", "Aged by the magic of a mermaid", "Watched your partner being torn apart by a giant"],
         darkSecrets: ["Addicted to drugs", "Stole or falsified documents to get research results", "Hunted by a vaesen"],
@@ -216,7 +216,7 @@ const ARCHETYPES_LIST: ArchetypeDefinition[] = [
         name: "Doctor", mainAttribute: "Logic", mainSkill: "Medicine", 
         talentChoices: ["Army Medic", "Chief Physician", "Emergency Medicine"], 
         resourceRange: [4, 6], 
-        startingEquipment: ["Doctor’s bag with medical equipment", "Liquor or fine wine", "Weak horse or strong poison"],
+        personalGear: ["Doctor’s bag with medical equipment", "Liquor or fine wine", "Weak horse or strong poison"],
         motivations: ["Exploring and describing the world", "Aiding the weak and afflicted", "Strengthening the Society and becoming its leader"],
         traumas: ["A corpse came back to life during an autopsy", "Operated on a person with donkey’s ears and hooves", "Saw your destiny in the eyes of a dying mermaid"],
         darkSecrets: ["Has two separate personalities", "Involved in illicit affairs", "Unnatural lust"],
@@ -231,7 +231,7 @@ const ARCHETYPES_LIST: ArchetypeDefinition[] = [
         name: "Hunter", mainAttribute: "Precision", mainSkill: "Ranged Combat", 
         talentChoices: ["Bloodhound", "Herbalist", "Marksman"], 
         resourceRange: [2, 4], 
-        startingEquipment: ["Rifle", "Hunting knife or hunting dog", "Hunting trap or hunting equipment"],
+        personalGear: ["Rifle", "Hunting knife or hunting dog", "Hunting trap or hunting equipment"],
         motivations: ["The thing that attacked my family must be destroyed", "Live in tune with nature", "Wants to bag some fantastic game"],
         traumas: ["Attacked by the branches of an ash tree wife", "Broke your leg in the forest, but was guided home by a will o’ the wisp", "Captured at dawn by a mountain troll and was stuck in its petrified arms"],
         darkSecrets: ["I sold my soul", "I cannot control my fits of rage", "Has children with a vaesen"],
@@ -246,7 +246,7 @@ const ARCHETYPES_LIST: ArchetypeDefinition[] = [
         name: "Occultist", mainAttribute: "Precision", mainSkill: "Stealth", 
         talentChoices: ["Conjuring tricks", "Medium", "Strike Fear"], 
         resourceRange: [1, 4], 
-        startingEquipment: ["Crystal ball", "Powdered stag’s horn or tinder box", "Dagger or cooking pot"],
+        personalGear: ["Crystal ball", "Powdered stag’s horn or tinder box", "Dagger or cooking pot"],
         motivations: ["Learning about vaesen", "Understanding myself", "Power"],
         traumas: ["Was hit by corrosive venom while trying to steal a lindworm egg", "The family farm is being run by a grumpy house nisse", "Was attacked by a night raven who infected you with a febrile disease"],
         darkSecrets: ["Guilty of a heinous crime", "My powers control me", "Changeling"],
@@ -261,7 +261,7 @@ const ARCHETYPES_LIST: ArchetypeDefinition[] = [
         name: "Officer", mainAttribute: "Precision", mainSkill: "Ranged Combat", 
         talentChoices: ["Battle-hardened", "Gentleman", "Tactician"], 
         resourceRange: [3, 7], 
-        startingEquipment: ["Rifle or pistol", "Compass or bayonet", "Map book or saber"],
+        personalGear: ["Rifle or pistol", "Compass or bayonet", "Map book or saber"],
         motivations: ["Make my father proud", "My friends need me", "Seek out danger and death"],
         traumas: ["Almost drowned when your ship was dragged down by a sea monster", "Lost all your men to an angry giant", "Saw dead warriors rise again on the battlefield"],
         darkSecrets: ["Deserter", "Cannot cope with filth and disorder", "Killed a defenseless enemy"],
@@ -276,7 +276,7 @@ const ARCHETYPES_LIST: ArchetypeDefinition[] = [
         name: "Priest", mainAttribute: "Empathy", mainSkill: "Observation", 
         talentChoices: ["Absolution", "Blessing", "Confessor"], 
         resourceRange: [4, 6], 
-        startingEquipment: ["Musical instrument or fine wines", "Writing utensils", "Holy water or old bible"],
+        personalGear: ["Musical instrument or fine wines", "Writing utensils", "Holy water or old bible"],
         motivations: ["Performing a sacred mission", "Cleansing my tarnished soul", "Understanding God’s creation"],
         traumas: ["Hurt someone after being enthralled by a witch", "Watched a church grim tear apart some thieves trying to steal the church silver", "The third owner of a spertus, serving the church to avoid being twisted"],
         darkSecrets: ["The Devil speaks to me", "I have stolen my identity", "Ensnared by a vaesen"],
@@ -291,7 +291,7 @@ const ARCHETYPES_LIST: ArchetypeDefinition[] = [
         name: "Private Detective", mainAttribute: "Logic", mainSkill: "Investigation", 
         talentChoices: ["Eagle Eye", "Elementary", "Focused"], 
         resourceRange: [2, 5], 
-        startingEquipment: ["Magnifying glass or lockpicks", "Revolver", "Knuckle duster or binoculars"],
+        personalGear: ["Magnifying glass or lockpicks", "Revolver", "Knuckle duster or binoculars"],
         motivations: ["Getting away from my family", "Uncovering the truth", "Thrill-seeking"],
         traumas: ["Heard the cry of a myling during your search for a missing child", "Had nightmares and woke up breathless and mare-ridden", "Came face-to-face with a werewolf"],
         darkSecrets: ["There is a price on my head", "Constant adulterer", "Drug addict"],
@@ -306,7 +306,7 @@ const ARCHETYPES_LIST: ArchetypeDefinition[] = [
         name: "Servant", mainAttribute: "Physique", mainSkill: "Force", 
         talentChoices: ["Loyal", "Robust", "Tough as Nails"], 
         resourceRange: [2, 4], 
-        startingEquipment: ["Revolver", "Hurricane lamp or make-up", "Field kitchen or simple bandages"],
+        personalGear: ["Revolver", "Hurricane lamp or make-up", "Field kitchen or simple bandages"],
         motivations: ["Protecting my master", "Curiosity", "An urge to help humans and vaesen alike"],
         traumas: ["Bitten by a brook horse", "Lost a master to the alluring song of the Neck", "Served a household plagued by a changeling"],
         darkSecrets: ["I murdered someone", "Persecuted for my religion", "Spying for a foreign power"],
@@ -321,7 +321,7 @@ const ARCHETYPES_LIST: ArchetypeDefinition[] = [
         name: "Vagabond", mainAttribute: "Physique", mainSkill: "Manipulation", 
         talentChoices: ["Hobo Tricks", "Suspicious", "Well-traveled"], 
         resourceRange: [1, 3], 
-        startingEquipment: ["Walking stick", "Knife or crowbar", "Liquor or pet dog"],
+        personalGear: ["Walking stick", "Knife or crowbar", "Liquor or pet dog"],
         motivations: ["Avenging my family", "Exposing supernatural secrets", "Being liked"],
         traumas: ["Saw a revenant rise from its grave", "Forever in love with a wood wife", "Survived a week inside a troll bag"],
         darkSecrets: ["Stolen identity", "Terminal illness", "A vaesen kills anyone I love"],
@@ -336,7 +336,7 @@ const ARCHETYPES_LIST: ArchetypeDefinition[] = [
         name: "Writer", mainAttribute: "Empathy", mainSkill: "Inspiration", 
         talentChoices: ["Automatic Writing", "Journalist", "Wordsmith"], 
         resourceRange: [2, 5], 
-        startingEquipment: ["Writing utensils and paper", "Camera or opera glasses", "Pet dog or book collection"],
+        personalGear: ["Writing utensils and paper", "Camera or opera glasses", "Pet dog or book collection"],
         motivations: ["Finding a certain vaesen", "Researching a book", "Revenge"],
         traumas: ["Angered fairies who put you to sleep and sucked your blood", "Cursed by a homeless vaettir to write a book in your own blood", "Heard the song of the Neck, but failed to write down the lyrics"],
         darkSecrets: ["I record and use the secrets and weaknesses of my friends", "Wanted for revolutionary ideas", "My life’s work is a lie"],
@@ -351,7 +351,7 @@ const ARCHETYPES_LIST: ArchetypeDefinition[] = [
         name: "Custom Life Path", mainAttribute: "", mainSkill: "",
         talentChoices: [], 
         resourceRange: [1, 8], 
-        startingEquipment: [],
+        personalGear: [],
         motivations: ["Unique goals defined by player"],
         traumas: ["Player-defined trauma"],
         darkSecrets: ["Player-defined dark secret"],
@@ -471,80 +471,80 @@ const ALL_TALENTS_LIST: TalentDefinition[] = [
 ];
 
 const ARMOR_DEFINITIONS: ArmorDefinition[] = [
-    { id: "light_armor", name: "Leather Cuirass", type: "Light", protection: 2, agilityPenalty: -1, availability: 2 },
-    { id: "medium_armor", name: "Chain Mail Shirt", type: "Medium", protection: 4, agilityPenalty: -2, availability: 3 },
-    { id: "heavy_armor", name: "Plate Mail Armor", type: "Heavy", protection: 6, agilityPenalty: -3, availability: 4 },
+    { id: "light_armor", name: "Leather Cuirass", type: "Light", protection: 2, agilityPenalty: -1, cost: 2 },
+    { id: "medium_armor", name: "Chain Mail Shirt", type: "Medium", protection: 4, agilityPenalty: -2, cost: 3 },
+    { id: "heavy_armor", name: "Plate Mail Armor", type: "Heavy", protection: 6, agilityPenalty: -3, cost: 4 },
 ];
 
 const WEAPON_DEFINITIONS: WeaponDefinition[] = [
-    { id: "kick_punch", name: "Kick or punch", damage: "1", range: "0", bonus: "—", skill: "Force", availability: 0, type: 'Melee' },
-    { id: "knuckle_duster", name: "Knuckle duster", damage: "1", range: "0", bonus: "+2", skill: "Close Combat", availability: 2, type: 'Melee' },
-    { id: "chair", name: "Chair", damage: "1", range: "0", bonus: "+1", skill: "Close Combat", availability: 1, type: 'Melee' },
-    { id: "sledgehammer", name: "Sledgehammer", damage: "2", range: "0", bonus: "-1", skill: "Close Combat", availability: 2, type: 'Melee' },
-    { id: "flail", name: "Flail", damage: "2", range: "0", bonus: "+2", skill: "Close Combat", availability: 4, type: 'Melee' },
-    { id: "club", name: "Club", damage: "1", range: "0", bonus: "+1", skill: "Close Combat", availability: 0, type: 'Melee' },
-    { id: "knife_dagger", name: "Knife or dagger", damage: "2", range: "0", bonus: "—", skill: "Close Combat", availability: 2, type: 'Melee' },
-    { id: "rapier", name: "Rapier", damage: "2", range: "0", bonus: "+1", skill: "Close Combat", availability: 3, type: 'Melee' },
-    { id: "sword_saber", name: "Sword or saber", damage: "2", range: "0", bonus: "+2", skill: "Close Combat", availability: 4, type: 'Melee' },
-    { id: "crowbar_weapon", name: "Crowbar (as weapon)", damage: "1", range: "0", bonus: "+2", skill: "Close Combat", availability: 2, type: 'Melee' }, 
-    { id: "axe", name: "Axe", damage: "2", range: "0", bonus: "+1", skill: "Close Combat", availability: 2, type: 'Melee' },
-    { id: "walking_stick", name: "Walking stick", damage: "1", range: "0", bonus: "+1", skill: "Close Combat", availability: 1, type: 'Melee' },
-    { id: "halberd", name: "Halberd", damage: "3", range: "0", bonus: "—", skill: "Close Combat", availability: 4, type: 'Melee' },
-    { id: "bayonet", name: "Bayonet", damage: "2", range: "0", bonus: "+2", skill: "Close Combat", availability: 3, type: 'Melee' },
-    { id: "whip", name: "Whip", damage: "1", range: "0", bonus: "+1", skill: "Close Combat", availability: 1, type: 'Melee' },
-    { id: "spear", name: "Spear", damage: "2", range: "0–1", bonus: "+1", skill: "Close Combat/Ranged Combat", availability: 1, type: 'Ranged' },
-    { id: "bow", name: "Bow", damage: "1", range: "0–2", bonus: "+1", skill: "Ranged Combat", availability: 1, type: 'Ranged' },
-    { id: "longbow", name: "Longbow", damage: "2", range: "1–3", bonus: "+1", skill: "Ranged Combat", availability: 2, type: 'Ranged' },
-    { id: "crossbow", name: "Crossbow", damage: "2", range: "0–2", bonus: "+1", skill: "Ranged Combat", availability: 3, type: 'Ranged' },
-    { id: "pistol_revolver", name: "Pistol or revolver", damage: "2", range: "0–1", bonus: "+2", skill: "Ranged Combat", availability: 4, type: 'Ranged' },
-    { id: "musket", name: "Musket", damage: "2", range: "1–3", bonus: "+1", skill: "Ranged Combat", availability: 3, type: 'Ranged' },
-    { id: "rifle", name: "Rifle", damage: "2", range: "1–3", bonus: "+2", skill: "Ranged Combat", availability: 4, type: 'Ranged' },
-    { id: "cannon", name: "Cannon", damage: "5", range: "2–5", bonus: "+1", skill: "Ranged Combat", availability: 5, type: 'Ranged' },
+    { id: "kick_punch", name: "Kick or punch", damage: "1", range: "0", bonus: "—", skill: "Force", cost: 0, type: 'Melee' },
+    { id: "knuckle_duster", name: "Knuckle duster", damage: "1", range: "0", bonus: "+2", skill: "Close Combat", cost: 2, type: 'Melee' },
+    { id: "chair", name: "Chair", damage: "1", range: "0", bonus: "+1", skill: "Close Combat", cost: 1, type: 'Melee' },
+    { id: "sledgehammer", name: "Sledgehammer", damage: "2", range: "0", bonus: "-1", skill: "Close Combat", cost: 2, type: 'Melee' },
+    { id: "flail", name: "Flail", damage: "2", range: "0", bonus: "+2", skill: "Close Combat", cost: 4, type: 'Melee' },
+    { id: "club", name: "Club", damage: "1", range: "0", bonus: "+1", skill: "Close Combat", cost: 0, type: 'Melee' },
+    { id: "knife_dagger", name: "Knife or dagger", damage: "2", range: "0", bonus: "—", skill: "Close Combat", cost: 2, type: 'Melee' },
+    { id: "rapier", name: "Rapier", damage: "2", range: "0", bonus: "+1", skill: "Close Combat", cost: 3, type: 'Melee' },
+    { id: "sword_saber", name: "Sword or saber", damage: "2", range: "0", bonus: "+2", skill: "Close Combat", cost: 4, type: 'Melee' },
+    { id: "crowbar_weapon", name: "Crowbar (as weapon)", damage: "1", range: "0", bonus: "+2", skill: "Close Combat", cost: 2, type: 'Melee' }, 
+    { id: "axe", name: "Axe", damage: "2", range: "0", bonus: "+1", skill: "Close Combat", cost: 2, type: 'Melee' },
+    { id: "walking_stick", name: "Walking stick", damage: "1", range: "0", bonus: "+1", skill: "Close Combat", cost: 1, type: 'Melee' },
+    { id: "halberd", name: "Halberd", damage: "3", range: "0", bonus: "—", skill: "Close Combat", cost: 4, type: 'Melee' },
+    { id: "bayonet", name: "Bayonet", damage: "2", range: "0", bonus: "+2", skill: "Close Combat", cost: 3, type: 'Melee' },
+    { id: "whip", name: "Whip", damage: "1", range: "0", bonus: "+1", skill: "Close Combat", cost: 1, type: 'Melee' },
+    { id: "spear", name: "Spear", damage: "2", range: "0–1", bonus: "+1", skill: "Close Combat/Ranged Combat", cost: 1, type: 'Ranged' },
+    { id: "bow", name: "Bow", damage: "1", range: "0–2", bonus: "+1", skill: "Ranged Combat", cost: 1, type: 'Ranged' },
+    { id: "longbow", name: "Longbow", damage: "2", range: "1–3", bonus: "+1", skill: "Ranged Combat", cost: 2, type: 'Ranged' },
+    { id: "crossbow", name: "Crossbow", damage: "2", range: "0–2", bonus: "+1", skill: "Ranged Combat", cost: 3, type: 'Ranged' },
+    { id: "pistol_revolver", name: "Pistol or revolver", damage: "2", range: "0–1", bonus: "+2", skill: "Ranged Combat", cost: 4, type: 'Ranged' },
+    { id: "musket", name: "Musket", damage: "2", range: "1–3", bonus: "+1", skill: "Ranged Combat", cost: 3, type: 'Ranged' },
+    { id: "rifle", name: "Rifle", damage: "2", range: "1–3", bonus: "+2", skill: "Ranged Combat", cost: 4, type: 'Ranged' },
+    { id: "cannon", name: "Cannon", damage: "5", range: "2–5", bonus: "+1", skill: "Ranged Combat", cost: 5, type: 'Ranged' },
 ];
 
-const GENERAL_EQUIPMENT_DEFINITIONS: GeneralEquipmentDefinition[] = [
-    { id: "crowbar", name: "Crowbar", bonus: "+1", availability: 2, effect: "Break locks with FORCE" },
-    { id: "lockpicks", name: "Lockpicks", bonus: "+1", availability: 2, effect: "Pick locks with STEALTH" },
-    { id: "opera_glasses", name: "Opera glasses", bonus: "+1", availability: 1, effect: "Use VIGILANCE from a distance" },
-    { id: "binoculars", name: "Binoculars", bonus: "+2", availability: 2, effect: "Use VIGILANCE from a distance" },
-    { id: "hunting_trap", name: "Hunting trap", bonus: "+1", availability: 1, effect: "Detect sneaking people with VIGILANCE" },
-    { id: "hunting_gear", name: "Hunting gear", bonus: "+2", availability: 2, effect: "Use INVESTIGATION in the wilderness" },
-    { id: "tinderbox", name: "Tinderbox", bonus: "+1", availability: 1, effect: "Use INVESTIGATION in dim places" },
-    { id: "hurricane_lamp", name: "Hurricane lamp", bonus: "+2", availability: 1, effect: "Use INVESTIGATION in darkness and detect sneaking people with VIGILANCE" },
-    { id: "compass", name: "Compass", bonus: "+1", availability: 2, effect: "Use LEARNING to find the way" },
-    { id: "magnifying_glass", name: "Magnifying glass", bonus: "+1", availability: 2, effect: "Use to find clues during INVESTIGATION" },
-    { id: "camera", name: "Camera", bonus: "+2", availability: 3, effect: "Use to gain knowledge about a place with LEARNING or INVESTIGATION" },
-    { id: "writing_utensils_paper", name: "Writing utensils and paper", bonus: "+1", availability: 1, effect: "Use to take notes during INVESTIGATION" },
-    { id: "slide_rule", name: "Slide rule", bonus: "+1", availability: 2, effect: "Use to make calculations with LEARNING" },
-    { id: "simple_bandages", name: "Simple bandages", bonus: "+1", availability: 1, effect: "Required for MEDICINE" },
-    { id: "medical_equipment", name: "Medical equipment", bonus: "+2", availability: 2, effect: "Required for MEDICINE" },
-    { id: "musical_instrument", name: "Musical instrument", bonus: "+1", availability: 2, effect: "Influence listeners with INSPIRATION" },
-    { id: "mastercrafted_musical_instrument", name: "Mastercrafted musical instrument", bonus: "+2", availability: 3, effect: "Influence listeners with INSPIRATION" },
-    { id: "cooking_pot", name: "Cooking pot", bonus: "+1", availability: 1, effect: "Cook with INSPIRATION" },
-    { id: "field_kitchen", name: "Field kitchen", bonus: "+2", availability: 2, effect: "Cook with INSPIRATION" },
-    { id: "simple_provisions", name: "Simple provisions", bonus: "—", availability: 1, effect: "Last several days without FORCE tests" },
-    { id: "nutritious_provisions", name: "Nutritious provisions", bonus: "—", availability: 2, effect: "Last many days without FORCE tests" },
-    { id: "liquor", name: "Liquor", bonus: "+1", availability: 1, effect: "INSPIRE with alcohol" },
-    { id: "fine_wines", name: "Fine wines", bonus: "+1", availability: 2, effect: "INSPIRE and MANIPULATE with alcohol" },
-    { id: "chemical_equipment", name: "Chemical equipment", bonus: "+1", availability: 2, effect: "Determine cause of death with INVESTIGATION" },
-    { id: "portable_laboratory", name: "Portable laboratory", bonus: "+1", availability: 3, effect: "Produce poison with LEARNING" },
-    { id: "book_collection", name: "Book collection", bonus: "+1", availability: 2, effect: "Use to find information for LEARNING" },
-    { id: "old_scrolls", name: "Old scrolls", bonus: "+2", availability: 3, effect: "Use to find information for LEARNING" },
-    { id: "crystal_ball", name: "Crystal ball", bonus: "+1", availability: 3, effect: "Use OBSERVATION to search for clues" },
-    { id: "map_book", name: "Map book", bonus: "+1", availability: 2, effect: "Use for INVESTIGATION and LEARNING when navigating" },
-    { id: "weak_horse", name: "Weak horse", bonus: "+1", availability: 2, effect: "Use for FORCE" },
-    { id: "strong_horse", name: "Strong horse", bonus: "+2", availability: 3, effect: "Use in CLOSE COMBAT and for FORCE" },
-    { id: "pet_dog", name: "Pet dog", bonus: "+1", availability: 1, effect: "Use for CLOSE COMBAT" },
-    { id: "guard_dog", name: "Guard dog", bonus: "+2", availability: 2, effect: "Use for VIGILANCE and CLOSE COMBAT" },
-    { id: "hunting_dog", name: "Hunting dog", bonus: "+3", availability: 3, effect: "Use for VIGILANCE, CLOSE COMBAT and INVESTIGATION" },
-    { id: "make_up", name: "Make-up", bonus: "+1", availability: 1, effect: "Sometimes required for MANIPULATION" },
-    { id: "disguise", name: "Disguise", bonus: "+2", availability: 2, effect: "Sometimes required for MANIPULATION" },
-    { id: "elegant_disguise", name: "Elegant disguise", bonus: "+2", availability: 3, effect: "Sometimes required for MANIPULATION and can be used to sneak with MANIPULATION" },
-    { id: "rope", name: "Rope", bonus: "+1", availability: 1, effect: "Use FORCE to climb" },
-    { id: "rope_ladder", name: "Rope ladder", bonus: "+3", availability: 2, effect: "Use FORCE or AGILITY to climb" },
-    { id: "weak_poison_3", name: "Weak poison (3 doses)", bonus: "—", availability: 1, effect: "Required to poison someone (toxicity 3)" },
-    { id: "strong_poison_2", name: "Strong poison (2 doses)", bonus: "—", availability: 2, effect: "Required to poison someone (toxicity 6)" },
-    { id: "extreme_poison_1", name: "Extremely strong poison (1 dose)", bonus: "—", availability: 3, effect: "Required to poison someone (toxicity 9)" },
+const GENERAL_GEAR_DEFINITIONS: GeneralGearDefinition[] = [
+    { id: "crowbar", name: "Crowbar", bonus: "+1", cost: 2, effect: "Break locks with FORCE" },
+    { id: "lockpicks", name: "Lockpicks", bonus: "+1", cost: 2, effect: "Pick locks with STEALTH" },
+    { id: "opera_glasses", name: "Opera glasses", bonus: "+1", cost: 1, effect: "Use VIGILANCE from a distance" },
+    { id: "binoculars", name: "Binoculars", bonus: "+2", cost: 2, effect: "Use VIGILANCE from a distance" },
+    { id: "hunting_trap", name: "Hunting trap", bonus: "+1", cost: 1, effect: "Detect sneaking people with VIGILANCE" },
+    { id: "hunting_gear", name: "Hunting gear", bonus: "+2", cost: 2, effect: "Use INVESTIGATION in the wilderness" },
+    { id: "tinderbox", name: "Tinderbox", bonus: "+1", cost: 1, effect: "Use INVESTIGATION in dim places" },
+    { id: "hurricane_lamp", name: "Hurricane lamp", bonus: "+2", cost: 1, effect: "Use INVESTIGATION in darkness and detect sneaking people with VIGILANCE" },
+    { id: "compass", name: "Compass", bonus: "+1", cost: 2, effect: "Use LEARNING to find the way" },
+    { id: "magnifying_glass", name: "Magnifying glass", bonus: "+1", cost: 2, effect: "Use to find clues during INVESTIGATION" },
+    { id: "camera", name: "Camera", bonus: "+2", cost: 3, effect: "Use to gain knowledge about a place with LEARNING or INVESTIGATION" },
+    { id: "writing_utensils_paper", name: "Writing utensils and paper", bonus: "+1", cost: 1, effect: "Use to take notes during INVESTIGATION" },
+    { id: "slide_rule", name: "Slide rule", bonus: "+1", cost: 2, effect: "Use to make calculations with LEARNING" },
+    { id: "simple_bandages", name: "Simple bandages", bonus: "+1", cost: 1, effect: "Required for MEDICINE" },
+    { id: "medical_equipment", name: "Medical equipment", bonus: "+2", cost: 2, effect: "Required for MEDICINE" },
+    { id: "musical_instrument", name: "Musical instrument", bonus: "+1", cost: 2, effect: "Influence listeners with INSPIRATION" },
+    { id: "mastercrafted_musical_instrument", name: "Mastercrafted musical instrument", bonus: "+2", cost: 3, effect: "Influence listeners with INSPIRATION" },
+    { id: "cooking_pot", name: "Cooking pot", bonus: "+1", cost: 1, effect: "Cook with INSPIRATION" },
+    { id: "field_kitchen", name: "Field kitchen", bonus: "+2", cost: 2, effect: "Cook with INSPIRATION" },
+    { id: "simple_provisions", name: "Simple provisions", bonus: "—", cost: 1, effect: "Last several days without FORCE tests" },
+    { id: "nutritious_provisions", name: "Nutritious provisions", bonus: "—", cost: 2, effect: "Last many days without FORCE tests" },
+    { id: "liquor", name: "Liquor", bonus: "+1", cost: 1, effect: "INSPIRE with alcohol" },
+    { id: "fine_wines", name: "Fine wines", bonus: "+1", cost: 2, effect: "INSPIRE and MANIPULATE with alcohol" },
+    { id: "chemical_equipment", name: "Chemical equipment", bonus: "+1", cost: 2, effect: "Determine cause of death with INVESTIGATION" },
+    { id: "portable_laboratory", name: "Portable laboratory", bonus: "+1", cost: 3, effect: "Produce poison with LEARNING" },
+    { id: "book_collection", name: "Book collection", bonus: "+1", cost: 2, effect: "Use to find information for LEARNING" },
+    { id: "old_scrolls", name: "Old scrolls", bonus: "+2", cost: 3, effect: "Use to find information for LEARNING" },
+    { id: "crystal_ball", name: "Crystal ball", bonus: "+1", cost: 3, effect: "Use OBSERVATION to search for clues" },
+    { id: "map_book", name: "Map book", bonus: "+1", cost: 2, effect: "Use for INVESTIGATION and LEARNING when navigating" },
+    { id: "weak_horse", name: "Weak horse", bonus: "+1", cost: 2, effect: "Use for FORCE" },
+    { id: "strong_horse", name: "Strong horse", bonus: "+2", cost: 3, effect: "Use in CLOSE COMBAT and for FORCE" },
+    { id: "pet_dog", name: "Pet dog", bonus: "+1", cost: 1, effect: "Use for CLOSE COMBAT" },
+    { id: "guard_dog", name: "Guard dog", bonus: "+2", cost: 2, effect: "Use for VIGILANCE and CLOSE COMBAT" },
+    { id: "hunting_dog", name: "Hunting dog", bonus: "+3", cost: 3, effect: "Use for VIGILANCE, CLOSE COMBAT and INVESTIGATION" },
+    { id: "make_up", name: "Make-up", bonus: "+1", cost: 1, effect: "Sometimes required for MANIPULATION" },
+    { id: "disguise", name: "Disguise", bonus: "+2", cost: 2, effect: "Sometimes required for MANIPULATION" },
+    { id: "elegant_disguise", name: "Elegant disguise", bonus: "+2", cost: 3, effect: "Sometimes required for MANIPULATION and can be used to sneak with MANIPULATION" },
+    { id: "rope", name: "Rope", bonus: "+1", cost: 1, effect: "Use FORCE to climb" },
+    { id: "rope_ladder", name: "Rope ladder", bonus: "+3", cost: 2, effect: "Use FORCE or AGILITY to climb" },
+    { id: "weak_poison_3", name: "Weak poison (3 doses)", bonus: "—", cost: 1, effect: "Required to poison someone (toxicity 3)" },
+    { id: "strong_poison_2", name: "Strong poison (2 doses)", bonus: "—", cost: 2, effect: "Required to poison someone (toxicity 6)" },
+    { id: "extreme_poison_1", name: "Extremely strong poison (1 dose)", bonus: "—", cost: 3, effect: "Required to poison someone (toxicity 9)" },
 ];
 
 const PHYSICAL_CRITICAL_INJURIES: CriticalInjuryDefinition[] = [
@@ -679,15 +679,15 @@ const FAST_ACTIONS_LIST: ActionListItem[] = [
 let noteIdCounter = 0;
 let relationshipIdCounter = 0;
 let weaponInstanceIdCounter = 0;
-let equipmentInstanceIdCounter = 0;
+let gearInstanceIdCounter = 0;
 let insightAfflictionIdCounter = 0;
 
-function getNextIdForType(type: 'Note' | 'Relationship' | 'WeaponInst' | 'EquipmentInst' | 'InsightAfflictionInst'): string {
+function getNextIdForType(type: 'Note' | 'Relationship' | 'WeaponInst' | 'GearInst' | 'InsightAfflictionInst'): string {
     switch (type) {
         case 'Note': noteIdCounter++; return `Note_${noteIdCounter}`;
         case 'Relationship': relationshipIdCounter++; return `Rel_${relationshipIdCounter}`;
         case 'WeaponInst': weaponInstanceIdCounter++; return `WeaponInst_${weaponInstanceIdCounter}`;
-        case 'EquipmentInst': equipmentInstanceIdCounter++; return `EquipInst_${equipmentInstanceIdCounter}`;
+        case 'GearInst': gearInstanceIdCounter++; return `GearInst_${gearInstanceIdCounter}`;
         case 'InsightAfflictionInst': insightAfflictionIdCounter++; return `IDInst_${insightAfflictionIdCounter}`;
         default: console.error("Unknown ID type:", type); return `Unknown_${Date.now()}`;
     }
@@ -703,7 +703,7 @@ function initializeAllIdCounters(rawData: any | null) {
                 if (!isNaN(suffix) && suffix > maxSuffix) {
                     maxSuffix = suffix;
                 }
-            } else if (item && typeof (item as any).instanceId === 'string' && (item as any).instanceId.startsWith(prefix)) { // For weapon/equipment
+            } else if (item && typeof (item as any).instanceId === 'string' && (item as any).instanceId.startsWith(prefix)) { // For weapon/gear
                  const suffix = parseInt((item as any).instanceId.substring(prefix.length), 10);
                 if (!isNaN(suffix) && suffix > maxSuffix) {
                     maxSuffix = suffix;
@@ -717,18 +717,18 @@ function initializeAllIdCounters(rawData: any | null) {
         noteIdCounter = getMaxIdSuffix(rawData.notes, "Note_");
         relationshipIdCounter = getMaxIdSuffix(rawData.relationships, "Rel_");
         weaponInstanceIdCounter = getMaxIdSuffix(rawData.weapons, "WeaponInst_");
-        equipmentInstanceIdCounter = getMaxIdSuffix(rawData.equipment, "EquipInst_");
+        gearInstanceIdCounter = getMaxIdSuffix(rawData.gear, "GearInst_");
         insightAfflictionIdCounter = getMaxIdSuffix(rawData.insightsAndAfflictions, "IDInst_");
     } else {
         noteIdCounter = 0;
         relationshipIdCounter = 0;
         weaponInstanceIdCounter = 0;
-        equipmentInstanceIdCounter = 0;
+        gearInstanceIdCounter = 0;
         insightAfflictionIdCounter = 0;
     }
 }
 
-const ID_PREFIXES = ["Note_", "Rel_", "WeaponInst_", "EquipInst_", "IDInst_"];
+const ID_PREFIXES = ["Note_", "Rel_", "WeaponInst_", "GearInst_", "IDInst_"];
 function isNewIdFormat(id: string): boolean {
     if (typeof id !== 'string') return false;
     return ID_PREFIXES.some(prefix => id.startsWith(prefix) && !isNaN(parseInt(id.substring(prefix.length), 10)));
@@ -862,24 +862,24 @@ function getDefaultCharacter(): Character {
         notes: [], 
         armor: null,
         weapons: [],
-        equipment: [],
+        gear: [],
         discordWebhookUrl: "",
         insightsAndAfflictions: [] 
     };
 }
 
 // --- DATA MIGRATION HELPERS (for load/import) ---
-const migrateListIds = <T extends {id: string}>(items: any[] | undefined, idPrefix: 'Note' | 'Relationship' | 'WeaponInst' | 'EquipmentInst' | 'InsightAfflictionInst', defaultProps: Partial<T> = {}): T[] => {
+const migrateListIds = <T extends {id: string}>(items: any[] | undefined, idPrefix: 'Note' | 'Relationship' | 'WeaponInst' | 'GearInst' | 'InsightAfflictionInst', defaultProps: Partial<T> = {}): T[] => {
     if (!Array.isArray(items)) return [];
     return items.map((item: any) => ({
         ...defaultProps,
         ...item,
         id: (item && typeof item.id === 'string' && isNewIdFormat(item.id)) ? item.id : getNextIdForType(idPrefix),
-        instanceId: idPrefix === 'WeaponInst' || idPrefix === 'EquipmentInst' ? ((item && typeof item.instanceId === 'string' && isNewIdFormat(item.instanceId)) ? item.instanceId : getNextIdForType(idPrefix)) : undefined
+        instanceId: idPrefix === 'WeaponInst' || idPrefix === 'GearInst' ? ((item && typeof item.instanceId === 'string' && isNewIdFormat(item.instanceId)) ? item.instanceId : getNextIdForType(idPrefix)) : undefined
     }));
 };
 
-const migrateWeaponEquipmentIds = <T extends {instanceId: string, id: string}>(items: any[] | undefined, idPrefix: 'WeaponInst' | 'EquipmentInst', definitionList: any[]): T[] => {
+const migrateWeaponGearIds = <T extends {instanceId: string, id: string}>(items: any[] | undefined, idPrefix: 'WeaponInst' | 'GearInst', definitionList: any[]): T[] => {
     if (!Array.isArray(items)) return [];
     return items.map((item: any) => {
         const definition = definitionList.find(def => def.id === item.id); 
@@ -905,7 +905,7 @@ function init() {
     renderRelationships();
     renderArmor();
     renderWeapons();
-    renderEquipment();
+    renderGear();
     renderInsightsAndAfflictions();
     renderNotes(); 
     
@@ -1295,14 +1295,14 @@ function renderWeapons() {
     });
 }
 
-function renderEquipment() {
-    const container = getEl<HTMLDivElement>('equipmentListContainer');
+function renderGear() {
+    const container = getEl<HTMLDivElement>('gearListContainer');
     container.innerHTML = '';
-    if (!character.equipment || character.equipment.length === 0) {
-        const p = document.createElement('p'); p.textContent = 'No equipment added.'; p.style.fontStyle = 'italic';
+    if (!character.gear || character.gear.length === 0) {
+        const p = document.createElement('p'); p.textContent = 'No gear added.'; p.style.fontStyle = 'italic';
         container.appendChild(p); return;
     }
-    character.equipment.forEach(item => {
+    character.gear.forEach(item => {
         const itemDiv = document.createElement('div'); itemDiv.classList.add('listed-item'); itemDiv.dataset.itemId = item.instanceId;
         const infoDiv = document.createElement('div'); infoDiv.classList.add('listed-item-info');
         infoDiv.innerHTML = `<p><strong>${item.name}</strong></p><p class="item-details">${item.bonus !== "—" ? `Bonus: ${item.bonus}, ` : ''}Effect: ${item.effect}</p>`;
@@ -1332,15 +1332,15 @@ function renderEquipment() {
 
             if (skillToUse && itemBonus !== 0) { // Only trigger roll if a skill is found and bonus is applicable
                 const rollNameForDisplay = `Using ${item.name} (${skillToUse.name})`;
-                openDiceRollModal('skill', rollNameForDisplay, skillToUse.attribute, skillToUse.name, itemBonus, "Equipment");
+                openDiceRollModal('skill', rollNameForDisplay, skillToUse.attribute, skillToUse.name, itemBonus, "Gear");
             } else if (skillToUse && itemBonus === 0 && item.bonus !== "—") { 
                 // Item might have a non-numeric bonus string like "special" but we couldn't parse it, or it's explicitly ±0.
                 // Still, if a skill is mentioned, we can roll for it without an item bonus.
                  const rollNameForDisplay = `Using ${item.name} (${skillToUse.name})`;
-                 openDiceRollModal('skill', rollNameForDisplay, skillToUse.attribute, skillToUse.name, 0, "Equipment");
+                 openDiceRollModal('skill', rollNameForDisplay, skillToUse.attribute, skillToUse.name, 0, "Gear");
             }
             else {
-                console.log(`Use Equipment: ${item.name}. Effect: ${item.effect}. Bonus: ${item.bonus}. No direct skill roll triggered or bonus is not applicable for a roll.`);
+                console.log(`Use Gear: ${item.name}. Effect: ${item.effect}. Bonus: ${item.bonus}. No direct skill roll triggered or bonus is not applicable for a roll.`);
                 // Optionally, show a small notification to the user if no roll is triggered.
                 // alert(`${item.name} used. Effect: ${item.effect}. No specific dice roll automatically triggered.`);
             }
@@ -1349,8 +1349,8 @@ function renderEquipment() {
 
         const deleteButton = document.createElement('button'); deleteButton.textContent = 'Delete'; deleteButton.classList.add('delete-button');
         deleteButton.addEventListener('click', () => {
-            character.equipment = character.equipment.filter(e => e.instanceId !== item.instanceId);
-            renderEquipment(); saveCharacterToLocalStorage();
+            character.gear = character.gear.filter(e => e.instanceId !== item.instanceId);
+            renderGear(); saveCharacterToLocalStorage();
         });
         actionsDiv.appendChild(deleteButton); 
         itemDiv.appendChild(actionsDiv); 
@@ -1772,7 +1772,7 @@ function updateSheetDisplay() {
     renderResourcesTable(); 
     renderTalents(); 
     renderRelationships();
-    renderArmor(); renderWeapons(); renderEquipment(); renderInsightsAndAfflictions(); renderNotes();
+    renderArmor(); renderWeapons(); renderGear(); renderInsightsAndAfflictions(); renderNotes();
     safeUpdate('talentsOther', character.otherTalents);
     safeUpdate('experiencePoints', character.experiencePoints, 'value', false); 
     safeUpdate('advantages', character.advantages);
@@ -1801,8 +1801,8 @@ function loadCharacterFromLocalStorage(): Character | null {
 
             const finalNotes = migrateListIds<NoteItem>(parsedData.notes, 'Note', { title: "Untitled Note", content: "", isLocked: true });
             const finalRelationships = migrateListIds<RelationshipItem>(parsedData.relationships, 'Relationship', { pcName: "", type: "" });
-            const finalWeapons = migrateWeaponEquipmentIds<WeaponItem>(parsedData.weapons, 'WeaponInst', WEAPON_DEFINITIONS);
-            const finalEquipment = migrateWeaponEquipmentIds<EquipmentItem>(parsedData.equipment, 'EquipmentInst', GENERAL_EQUIPMENT_DEFINITIONS);
+            const finalWeapons = migrateWeaponGearIds<WeaponItem>(parsedData.weapons, 'WeaponInst', WEAPON_DEFINITIONS);
+            const finalGear = migrateWeaponGearIds<GearItem>(parsedData.gear, 'GearInst', GENERAL_GEAR_DEFINITIONS);
             const finalInsightsAfflictions = migrateListIds<InsightAfflictionItem>(parsedData.insightsAndAfflictions, 'InsightAfflictionInst', { originalId: "", name: "", effect: "", type: "Affliction" });
 
 
@@ -1825,7 +1825,7 @@ function loadCharacterFromLocalStorage(): Character | null {
                 notes: finalNotes,
                 relationships: finalRelationships,
                 weapons: finalWeapons,
-                equipment: finalEquipment,
+                gear: finalGear,
                 insightsAndAfflictions: finalInsightsAfflictions,
                 resources: (typeof parsedData.resources === 'number' && parsedData.resources >= 1 && parsedData.resources <= 8) ? parsedData.resources : defaultChar.resources,
             };
@@ -1969,7 +1969,7 @@ function closeDiscordSettingsModal() { if (discordSettingsModal) discordSettings
 
 const armorSelectionModal = getEl<HTMLDivElement>('armorSelectionModal');
 const weaponSelectionModal = getEl<HTMLDivElement>('weaponSelectionModal');
-const equipmentSelectionModal = getEl<HTMLDivElement>('equipmentSelectionModal');
+const gearSelectionModal = getEl<HTMLDivElement>('gearSelectionModal');
 const gainXpModal = getEl<HTMLDivElement>('gainXpModal');
 const diceRollModal = getEl<HTMLDivElement>('diceRollModal');
 const resourceRollResultModal = getEl<HTMLDivElement>('resourceRollResultModal');
@@ -2021,10 +2021,10 @@ if (closeConfirmationModalBtn) closeConfirmationModalBtn.addEventListener('click
 function openModal(modal: HTMLDivElement | null) { if (modal) modal.style.display = 'block'; }
 function closeModal(modal: HTMLDivElement | null) { if (modal) modal.style.display = 'none'; }
 
-function populateGearModalSelect(selectId: string, descriptionId: string, items: (ArmorDefinition | WeaponDefinition | GeneralEquipmentDefinition)[], includeNoneOption: boolean = false) {
+function populateGearModalSelect(selectId: string, descriptionId: string, items: (ArmorDefinition | WeaponDefinition | GeneralGearDefinition)[], includeNoneOption: boolean = false) {
     const selectEl = getEl<HTMLSelectElement>(selectId); const descEl = getEl<HTMLDivElement>(descriptionId); selectEl.innerHTML = '';
     if (includeNoneOption) { const noneOpt = document.createElement('option'); noneOpt.value = ""; noneOpt.textContent = "-- None --"; noneOpt.title = "Unequip armor"; selectEl.appendChild(noneOpt); }
-    else { const placeholderOpt = document.createElement('option'); placeholderOpt.value = ""; placeholderOpt.textContent = `-- Select ${selectId.includes('Armor') ? 'Armor' : selectId.includes('Weapon') ? 'Weapon' : 'Equipment'} --`; selectEl.appendChild(placeholderOpt); }
+    else { const placeholderOpt = document.createElement('option'); placeholderOpt.value = ""; placeholderOpt.textContent = `-- Select ${selectId.includes('Armor') ? 'Armor' : selectId.includes('Weapon') ? 'Weapon' : 'Gear'} --`; selectEl.appendChild(placeholderOpt); }
     items.forEach(item => {
         const option = document.createElement('option'); option.value = item.id; option.textContent = item.name;
         if ('protection' in item) option.title = `Type: ${item.type}, Protection: ${item.protection}, Agility Penalty: ${item.agilityPenalty}`;
@@ -2035,9 +2035,9 @@ function populateGearModalSelect(selectId: string, descriptionId: string, items:
     selectEl.onchange = () => {
         const selectedId = selectEl.value; const selectedItem = items.find(i => i.id === selectedId);
         if (selectedItem) {
-             if ('protection' in selectedItem) descEl.textContent = `Type: ${selectedItem.type}, Protection: ${selectedItem.protection}, Agility Penalty: ${selectedItem.agilityPenalty}, Availability: ${selectedItem.availability}`;
-            else if ('damage' in selectedItem) descEl.textContent = `Damage: ${selectedItem.damage}, Range: ${selectedItem.range}, Bonus: ${selectedItem.bonus}, Skill: ${selectedItem.skill}, Availability: ${selectedItem.availability}`;
-            else descEl.textContent = `Bonus: ${selectedItem.bonus}, Availability: ${selectedItem.availability}. Effect: ${selectedItem.effect}`;
+             if ('protection' in selectedItem) descEl.textContent = `Type: ${selectedItem.type}, Protection: ${selectedItem.protection}, Agility Penalty: ${selectedItem.agilityPenalty}, Cost: ${selectedItem.cost}`;
+            else if ('damage' in selectedItem) descEl.textContent = `Damage: ${selectedItem.damage}, Range: ${selectedItem.range}, Bonus: ${selectedItem.bonus}, Skill: ${selectedItem.skill}, Cost: ${selectedItem.cost}`;
+            else descEl.textContent = `Bonus: ${selectedItem.bonus}, Cost: ${selectedItem.cost}. Effect: ${selectedItem.effect}`;
         } else descEl.textContent = "Description will appear here.";
         updateSelectTooltip(selectEl);
     };
@@ -2124,8 +2124,8 @@ interface RollDetails {
     basePool: number;             // Attribute (+ Skill if applicable)
     conditionMod: number;
     insightAfflictionMod: number;
-    externalBonusValue: number;   // Bonus from weapon, equipment, etc.
-    externalBonusLabel: string;   // "Weapon", "Equipment", or ""
+    externalBonusValue: number;   // Bonus from weapon, gear, etc.
+    externalBonusLabel: string;   // "Weapon", "Gear", or ""
     gmMod: number; // Represents "Other Dice"
     finalPool: number;
     results: number[];
@@ -2170,9 +2170,9 @@ function openDiceRollModal(
     if (rollType === 'attribute') {
         calculatedBasePool = character.attributes[itemName] || 0;
         attributeForConditionAndPushCheck = itemName;
-    } else if (rollType === 'skill' && baseAttributeName) { // Covers generic skill rolls and equipment-augmented skill rolls
+    } else if (rollType === 'skill' && baseAttributeName) { // Covers generic skill rolls and gear-augmented skill rolls
         calculatedBasePool = (character.attributes[baseAttributeName] || 0) + (character.skills[itemName] || 0);
-        if (baseSkillName) { // If called from equipment or weapon, itemName is descriptive, baseSkillName is the actual skill
+        if (baseSkillName) { // If called from gear or weapon, itemName is descriptive, baseSkillName is the actual skill
             calculatedBasePool = (character.attributes[baseAttributeName] || 0) + (character.skills[baseSkillName] || 0);
             itemForInsightAfflictionCheck = baseSkillName;
         } else { // direct skill roll, itemName is the skill
@@ -2740,7 +2740,7 @@ function handleClearCharacterSheet() {
             renderRelationships();
             renderArmor();
             renderWeapons();
-            renderEquipment();
+            renderGear();
             renderInsightsAndAfflictions();
             renderNotes(); 
             
@@ -2893,9 +2893,9 @@ function setupEventListeners() {
         } 
         closeModal(weaponSelectionModal); 
     });
-    addListener('openEquipmentModalBtn', 'click', () => { populateGearModalSelect('modalEquipmentSelect', 'modalEquipmentDescription', GENERAL_EQUIPMENT_DEFINITIONS); openModal(equipmentSelectionModal); });
-    addListener('closeEquipmentModalBtn', 'click', () => closeModal(equipmentSelectionModal));
-    addListener('confirmAddEquipmentBtn', 'click', () => { const id = getEl<HTMLSelectElement>('modalEquipmentSelect').value; const def = GENERAL_EQUIPMENT_DEFINITIONS.find(e => e.id === id); if (def) { character.equipment.push({ ...def, instanceId: getNextIdForType('EquipmentInst') }); renderEquipment(); saveCharacterToLocalStorage(); } closeModal(equipmentSelectionModal); });
+    addListener('openGearModalBtn', 'click', () => { populateGearModalSelect('modalGearSelect', 'modalGearDescription', GENERAL_GEAR_DEFINITIONS); openModal(gearSelectionModal); });
+    addListener('closeGearModalBtn', 'click', () => closeModal(gearSelectionModal));
+    addListener('confirmAddGearBtn', 'click', () => { const id = getEl<HTMLSelectElement>('modalGearSelect').value; const def = GENERAL_GEAR_DEFINITIONS.find(e => e.id === id); if (def) { character.gear.push({ ...def, instanceId: getNextIdForType('GearInst') }); renderGear(); saveCharacterToLocalStorage(); } closeModal(gearSelectionModal); });
     
     addListener('gainXpBtn', 'click', openGainXpModal);
     addListener('closeGainXpModalBtn', 'click', closeGainXpModal);
@@ -2904,7 +2904,7 @@ function setupEventListeners() {
 
     addListener('spendXpBtn', 'click', handleSpendFiveXp); 
     
-    [armorSelectionModal, weaponSelectionModal, equipmentSelectionModal, gainXpModal, confirmationModal, diceRollModal, resourceRollResultModal, slowActionsModal, fastActionsModal, fearTestModal].forEach(m => { 
+    [armorSelectionModal, weaponSelectionModal, gearSelectionModal, gainXpModal, confirmationModal, diceRollModal, resourceRollResultModal, slowActionsModal, fastActionsModal, fearTestModal].forEach(m => { 
         if(m) window.addEventListener('click', (e) => { 
             if (e.target === m) {
                 if (m === confirmationModal) closeConfirmationModal();
@@ -3037,8 +3037,8 @@ function importCharacter(event: Event) {
                 // --- Migration logic similar to loadCharacterFromLocalStorage ---
                 const finalNotes = migrateListIds<NoteItem>(importedParsedData.notes, 'Note', { title: "Untitled Note", content: "", isLocked: true });
                 const finalRelationships = migrateListIds<RelationshipItem>(importedParsedData.relationships, 'Relationship', { pcName: "", type: "" });
-                const finalWeapons = migrateWeaponEquipmentIds<WeaponItem>(importedParsedData.weapons, 'WeaponInst', WEAPON_DEFINITIONS);
-                const finalEquipment = migrateWeaponEquipmentIds<EquipmentItem>(importedParsedData.equipment, 'EquipmentInst', GENERAL_EQUIPMENT_DEFINITIONS);
+                const finalWeapons = migrateWeaponGearIds<WeaponItem>(importedParsedData.weapons, 'WeaponInst', WEAPON_DEFINITIONS);
+                const finalGear = migrateWeaponGearIds<GearItem>(importedParsedData.gear, 'GearInst', GENERAL_GEAR_DEFINITIONS);
                 const finalInsightsAfflictions = migrateListIds<InsightAfflictionItem>(importedParsedData.insightsAndAfflictions, 'InsightAfflictionInst', { originalId: "", name: "", effect: "", type: "Affliction" });
 
                 // Assign to the global character object, merging deeply and correctly
@@ -3062,7 +3062,7 @@ function importCharacter(event: Event) {
                     notes: finalNotes,
                     relationships: finalRelationships,
                     weapons: finalWeapons,
-                    equipment: finalEquipment,
+                    gear: finalGear,
                     insightsAndAfflictions: finalInsightsAfflictions,
                     resources: (typeof importedParsedData.resources === 'number' && importedParsedData.resources >= 1 && importedParsedData.resources <= 8) ? importedParsedData.resources : defaultChar.resources,
                 };

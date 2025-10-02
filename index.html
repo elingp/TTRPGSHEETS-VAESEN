@@ -180,14 +180,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="combat-gear-column equipment-column">
-                            <div class="sub-section equipment-sub-section"> 
+                        <div class="combat-gear-column gear-column">
+                            <div class="sub-section gear-sub-section"> 
                                  <div class="sub-section-header">
-                                    <h3>Equipment</h3>
-                                    <button id="openEquipmentModalBtn">Add Equipment</button>
+                                    <h3>Gear</h3>
+                                    <button id="openGearModalBtn">Add Gear</button>
                                 </div>
-                                <div id="equipmentListContainer" class="item-list-container">
-                                    <!-- Equipment will be added dynamically -->
+                                <div id="gearListContainer" class="item-list-container">
+                                    <!-- Gear will be added dynamically -->
                                 </div>
                             </div>
                         </div>
@@ -384,22 +384,22 @@
         </div>
     </div>
 
-    <!-- Equipment Selection Modal -->
-    <div id="equipmentSelectionModal" class="modal" style="display: none;">
+    <!-- Gear Selection Modal -->
+    <div id="gearSelectionModal" class="modal" style="display: none;">
         <div class="modal-content">
-            <span class="close-button" id="closeEquipmentModalBtn">&times;</span>
-            <h3>Add Equipment</h3>
+            <span class="close-button" id="closeGearModalBtn">&times;</span>
+            <h3>Add Gear</h3>
             <div>
-                <label for="modalEquipmentSelect">Select Equipment:</label>
-                <select id="modalEquipmentSelect">
-                    <option value="">-- Select Equipment --</option>
-                    <!-- Equipment options populated by JS -->
+                <label for="modalGearSelect">Select Gear:</label>
+                <select id="modalGearSelect">
+                    <option value="">-- Select Gear --</option>
+                    <!-- Gear options populated by JS -->
                 </select>
             </div>
-            <div id="modalEquipmentDescription" class="item-description-modal">
+            <div id="modalGearDescription" class="item-description-modal">
                 Description will appear here.
             </div>
-            <button id="confirmAddEquipmentBtn">Add Equipment</button>
+            <button id="confirmAddGearBtn">Add Gear</button>
         </div>
     </div>
 
