@@ -1883,7 +1883,7 @@ function loadCharacterFromLocalStorage(): Character | null {
 // --- TALENT HELPERS ---
 function canTakeTalentMultipleTimes(talentId: string): boolean {
     // List of talents that can be taken multiple times
-    const multipleTimeTalents = ['tactician', 'wealthy'];
+    const multipleTimeTalents = ['wealthy'];
     return multipleTimeTalents.includes(talentId);
 }
 
