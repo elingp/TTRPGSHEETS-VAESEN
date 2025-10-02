@@ -2517,7 +2517,6 @@ interface FearTestDetails {
     finalPool: number;
     results: number[];
     successes: number;
-    roundsTerrified: number;
 }
 let currentFearTestDetails: FearTestDetails | null = null;
 
@@ -2533,7 +2532,6 @@ function getDefaultFearTestDetails(): FearTestDetails {
         finalPool: 0,
         results: [],
         successes: 0,
-        roundsTerrified: 0,
     };
 }
 
@@ -2635,8 +2633,6 @@ function openFearTestModal() {
 
     getEl<HTMLSpanElement>('fearTestRollResultsDisplay').textContent = '';
     getEl<HTMLSpanElement>('fearTestSuccessesDisplay').textContent = '0';
-    getEl<HTMLSpanElement>('fearTestRoundsTerrifiedDisplay').textContent = '0';
-    getEl<HTMLParagraphElement>('fearTestRoundsTerrifiedLine').style.display = 'none';
     
     updateFearTestModalDisplays();
     openModal(fearTestModal);
@@ -2663,10 +2659,8 @@ async function handleRollFearTest() {
     if (currentFearTestDetails.finalPool <= 0) {
         currentFearTestDetails.results = [];
         currentFearTestDetails.successes = 0;
-        currentFearTestDetails.roundsTerrified = 0;
         getEl<HTMLSpanElement>('fearTestRollResultsDisplay').textContent = "Cannot roll 0 or fewer dice.";
         getEl<HTMLSpanElement>('fearTestSuccessesDisplay').textContent = '0';
-        getEl<HTMLParagraphElement>('fearTestRoundsTerrifiedLine').style.display = 'none';
         await sendFearRollToDiscord();
         return;
     }
@@ -2679,19 +2673,8 @@ async function handleRollFearTest() {
         if (roll === 6) currentFearTestDetails.successes++;
     }
 
-    currentFearTestDetails.roundsTerrified = 0;
-    if (currentFearTestDetails.targetSuccesses !== null && currentFearTestDetails.successes < currentFearTestDetails.targetSuccesses) {
-        currentFearTestDetails.roundsTerrified = Math.floor(Math.random() * 6) + 1;
-    }
-
     getEl<HTMLSpanElement>('fearTestRollResultsDisplay').textContent = currentFearTestDetails.results.join(', ');
     getEl<HTMLSpanElement>('fearTestSuccessesDisplay').textContent = currentFearTestDetails.successes.toString();
-    if (currentFearTestDetails.roundsTerrified > 0) {
-        getEl<HTMLSpanElement>('fearTestRoundsTerrifiedDisplay').textContent = currentFearTestDetails.roundsTerrified.toString();
-        getEl<HTMLParagraphElement>('fearTestRoundsTerrifiedLine').style.display = 'block';
-    } else {
-        getEl<HTMLParagraphElement>('fearTestRoundsTerrifiedLine').style.display = 'none';
-    }
     await sendFearRollToDiscord();
 }
 
@@ -2706,17 +2689,12 @@ async function sendFearRollToDiscord() {
         details += ` Target: ${currentFearTestDetails.targetSuccesses}.`;
     }
     
-    let additionalInfo = "";
-    if (currentFearTestDetails.roundsTerrified > 0) {
-        additionalInfo = `**Rounds Terrified: ${currentFearTestDetails.roundsTerrified}** (1D6)`;
-    }
-
     await sendSimpleRollToDiscord(
         "Fear Test",
         details + `\n**Final Dice Pool: ${currentFearTestDetails.finalPool}**`,
         currentFearTestDetails.results,
         currentFearTestDetails.successes,
-        additionalInfo
+        ""
     );
 }
 
