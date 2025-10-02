@@ -189,7 +189,7 @@ const SKILLS_LIST: SkillDefinition[] = [
 const SKILL_KEYS = SKILLS_LIST.map(s => s.name);
 
 const GENERIC_RELATIONSHIP_HOOKS = [ 
-    "Needs my character's help with something.",
+    "Needs my character’s help with something.",
     "My character wants to protect them.",
     "My character is suspicious of them."
 ];
@@ -315,7 +315,7 @@ const ARCHETYPES_LIST: ArchetypeDefinition[] = [
             "I don’t take orders from you",
             "Mutual respect"
         ],
-        description: "Often overlooked but resilient and resourceful, with a strong sense of duty and an intimate knowledge of their employers' lives."
+        description: "Often overlooked but resilient and resourceful, with a strong sense of duty and an intimate knowledge of their employers’ lives."
     },
     { 
         name: "Vagabond", mainAttribute: "Physique", mainSkill: "Manipulation", 
@@ -432,15 +432,15 @@ const ALL_TALENTS_LIST: TalentDefinition[] = [
     { id: "absolution", name: "Absolution", description: "A PC confessing to you during Resting heals 3 Conditions instead of 2.", archetype: "Priest" },
     { id: "blessing", name: "Blessing", description: "Once per session, bless an object or PC. Target gains Blessed Advantage (+2 to a test). Expires on use or end of mystery. The same target can only be blessed once per mystery.", archetype: "Priest" },
     { id: "confessor", name: "Confessor", description: "Use OBSERVATION instead of MANIPULATION for confidential conversations.", archetype: "Priest" },
-    { id: "eagleEye", name: "Eagle Eye", description: "Gain +2 to VIGILANCE when interpreting a situation you're not involved in.", archetype: "Private Detective" },
+    { id: "eagleEye", name: "Eagle Eye", description: "Gain +2 to VIGILANCE when interpreting a situation you’re not involved in.", archetype: "Private Detective" },
     { id: "elementary", name: "Elementary", description: "Once per session, ask GM to explain how clues are connected.", archetype: "Private Detective" },
     { id: "focused", name: "Focused", description: "Ignore penalties from Conditions when making INVESTIGATION tests.", archetype: "Private Detective" },
-    { id: "loyal", name: "Loyal", description: "Gain +2 on Fear tests in the presence of someone you've sworn to protect.", archetype: "Servant" },
+    { id: "loyal", name: "Loyal", description: "Gain +2 on Fear tests in the presence of someone you’ve sworn to protect.", archetype: "Servant" },
     { id: "robust", name: "Robust", description: "May ignore penalties for physical Conditions on one roll per gaming session.", archetype: "Servant" },
     { id: "toughAsNails", name: "Tough as Nails", description: "Gain +2 to FORCE when fighting unarmed.", archetype: "Servant" },
     { id: "hoboTricks", name: "Hobo Tricks", description: "Gain +2 to STEALTH when hiding yourself/object from a wealthy human.", archetype: "Vagabond" },
     { id: "suspicious", name: "Suspicious", description: "Ignore mental Conditions when making VIGILANCE tests.", archetype: "Vagabond" },
-    { id: "wellTraveled", name: "Well-traveled", description: "Once per mystery, MANIPULATION test to create an NPC in the area you've met. GM decides how they changed. Fail = hostile/needs help.", archetype: "Vagabond" },
+    { id: "wellTraveled", name: "Well-traveled", description: "Once per mystery, MANIPULATION test to create an NPC in the area you’ve met. GM decides how they changed. Fail = hostile/needs help.", archetype: "Vagabond" },
     { id: "automaticWriting", name: "Automatic Writing", description: "Use INSPIRATION to gain clues via automatic writing. GM gives vague clues/predictions/insights. Extra successes = more clues. Fail = Condition/possessed/personality change (a few hours). Once per session.", archetype: "Writer" },
     { id: "journalist", name: "Journalist", description: "Use INSPIRATION instead of MANIPULATION when charming/deceiving for information.", archetype: "Writer" },
     { id: "wordsmith", name: "Wordsmith", description: "Ignore penalties from Conditions when making INSPIRATION tests.", archetype: "Writer" },
@@ -466,7 +466,7 @@ const ALL_TALENTS_LIST: TalentDefinition[] = [
     { id: "safetyInNumbers", name: "Safety in Numbers", description: "Gain +2 to Fear tests when with at least two other PCs. (In combat, only if in same zone)." },
     { id: "sixthSense", name: "Sixth Sense", description: "When making INVESTIGATION tests, spend extra successes to learn if vaesen was in area, vague impressions of kind, or if magic used." },
     { id: "sprinter", name: "Sprinter", description: "Gain +2 to AGILITY when trying to outrun or chase down someone." },
-    { id: "theLordsShepherd", name: "The Lord's Shepherd", description: "Gain +2 when using INSPIRATION to treat a mental critical injury." },
+    { id: "theLordsShepherd", name: "The Lord’s Shepherd", description: "Gain +2 when using INSPIRATION to treat a mental critical injury." },
     { id: "wealthy", name: "Wealthy", description: "Increase Resources by 1 (can be purchased multiple times)." },
 ];
 
