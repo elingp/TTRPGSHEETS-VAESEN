@@ -548,7 +548,6 @@ const GENERAL_GEAR_DEFINITIONS: GeneralGearDefinition[] = [
 ];
 
 const PHYSICAL_CRITICAL_INJURIES: CriticalInjuryDefinition[] = [
-    // From p.69 OCR
     { id: "phys_11", d66: "11", injury: "Foot injury", status: "Affliction", effect: "Limp, AGILITY −1", table: "Physical" },
     { id: "phys_12", d66: "12", injury: "Broken fingers", status: "Affliction", effect: "Crooked fingers, CLOSE COMBAT −1", table: "Physical" },
     { id: "phys_13", d66: "13", injury: "Ruptured tendon", status: "Affliction", effect: "Reduced mobility, AGILITY −1", table: "Physical" },
@@ -588,7 +587,6 @@ const PHYSICAL_CRITICAL_INJURIES: CriticalInjuryDefinition[] = [
 ];
 
 const MENTAL_CRITICAL_INJURIES: CriticalInjuryDefinition[] = [
-    // From p.70 OCR
     { id: "ment_11", d66: "11", injury: "Confused", status: "Affliction", effect: "Dazed, INVESTIGATION −1", table: "Mental" },
     { id: "ment_12", d66: "12", injury: "Overwhelmed", status: "Affliction", effect: "Sensitive to stress, STEALTH −1", table: "Mental" },
     { id: "ment_13", d66: "13", injury: "Pushed too far", status: "Affliction", effect: "Fanatic, MANIPULATION −1", table: "Mental" },
